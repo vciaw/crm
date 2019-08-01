@@ -1,0 +1,158 @@
+<!--#include file="../data/conn.asp" --><!--#include file="../data/EasyCrm.asp"-->
+<%Set EasyCrm  = New EasyCRM_CRM%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"><head>
+<meta http-equiv="Content-Type" content="text/html; charset=GBK" />
+<link href="<%=SiteUrl&skinurl%>Style/common.css" rel="stylesheet" type="text/css">
+</head>
+
+<body style="padding-top:35px;">
+
+<table width="100%" border="0" cellpadding="0" cellspacing="0" class="top_bg">
+	<tr>
+		<td class="top_left td_t_n td_r_n">当前位置：用户管理 > 个人资料管理</td>
+		<td class="top_right td_t_n td_r_n">
+			<input type="button" class="button_top_reload" value=" " title="刷新" onClick=window.location.href="javascript:window.location.reload();" />
+			<input type="button" class="button_top_back" value=" " title="后退" onClick=window.location.href="javascript:history.back();" />
+			<input type="button" class="button_top_go" value=" " title="前进" onClick=window.location.href="javascript:history.go(1);" />
+        </td>
+	</tr>
+</table>
+
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+	<tr>
+		<td valign="top" class="td_n pdl10 pdr10 pdt10">
+<%
+action = Trim(Request("action"))
+Select Case action
+Case "Edit"
+    Call EditData()
+Case "saveEdit"
+    Call saveEditData()
+Case Else
+    Call Main()
+End Select
+
+
+Sub Main()
+    Dim uId
+	uId = CLng(ABS(Request("uId")))
+	If Not IsNumeric(uId) Or uId <= 0 Then Response.Write("<script>alert("""&alert01&""");history.back(1);</script>")
+	Dim uAccount,uPassword,uName,uLevel,uGroup,uMobile,uEmail,uAddress,uBirthday,ucard,uaddtime
+	Set rs = Server.CreateObject("ADODB.Recordset")
+	rs.Open "Select * From [user] Where uId = " & uId,conn,1,1
+	If rs.RecordCount <> 1 Then Response.Write "<script>alert(""员工不存在"");</script>"
+	uAccount = rs("uAccount")
+	uPassword = rs("uPassword")
+	uName = rs("uName")
+	uLevel = rs("uLevel")
+	uGroup = rs("uGroup")
+	uMobile = rs("uMobile")
+	uEmail = rs("uEmail")
+	uAddress = rs("uAddress")
+	uBirthday = rs("uBirthday")
+	ucard = rs("ucard")
+	uaddtime = rs("uaddtime")
+	rs.Close
+	Set rs = Nothing
+%>
+            <form name="newUser" id="newUser" action="?action=saveEdit" method="post" onSubmit="return checkInput();">
+			<table width="100%" border="0" cellspacing="0" cellpadding="0" CLASS="table_1">
+				<col width="100" /><col width="200" /><col width="100" />
+				<tr class="tr_t"> 
+					<td class="td_l_l" COLSPAN="4">基本资料</td>
+				</tr>
+				<tr> 
+					<td class="td_l_c title">登录账号</td>
+					<td class="td_l_l"><% = uAccount %></td>
+					<td class="td_l_c title">真实姓名</td>
+					<td class="td_l_l"><% = uName %></td>
+				</tr>
+				<tr>
+					<td class="td_l_c title">初始密码</td>
+					<td class="td_l_l"><input name="password" type="password" class="int" id="password" size="11" maxlength="16" selfValue="<%=L_User_spswd%>"></td>
+					<td class="td_l_c title">重复密码</td>
+					<td class="td_l_l"><input name="confirmPWS" type="password" class="int" id="confirmPWS" size="11" maxlength="16" selfValue="<%=L_User_rpswd%>"></td>
+				</tr>
+				<tr>
+					<td class="td_l_c title">默认权限</td>
+					<td class="td_l_l"><% = EasyCrm.getNewItem("system_level","lId",EasyCrm.getNewItem("User","uId",""&uId&"","uLevel"),"lName")%></td>
+					<td class="td_l_c title">所属部门</td>
+					<td class="td_l_l"><% = EasyCrm.getNewItem("system_group","gId",EasyCrm.getNewItem("User","uId",""&uId&"","uGroup"),"gName") %></td>
+				</tr>
+				<tr>
+					<td class="td_l_c title">生日</td>
+					<td class="td_l_l"><input name="Birthday" type="text" id="Birthday" class="Wdate" value="<% = EasyCrm.FormatDate(uBirthday,2) %>" size="15" onFocus="WdatePicker()"></td>
+					<td class="td_l_c title">入司时间</td>
+					<td class="td_l_l"><input name="addtime" type="text" id="addtime" class="Wdate" value="<% = EasyCrm.FormatDate(uaddtime,2) %>" size="15" onFocus="WdatePicker()"></td>
+				</tr>
+				<tr>
+					<td class="td_l_c title">E-mail</td>
+					<td class="td_l_l" colspan="3"><input name="Email" type="text" class="int" id="Email" value="<% = uEmail %>" size="40"></td>
+				</tr>
+				<tr>
+					<td class="td_l_c title">手机</td>
+					<td class="td_l_l" colspan="3"><input name="Mobile" type="text" class="int" id="Mobile" value="<% = uMobile %>" size="20" maxlength="16"></td>
+				</tr>
+				<tr>
+					<td class="td_l_c title">身份证</td>
+					<td class="td_l_l" colspan="3"><input name="card" type="text" class="int" id="card" value="<% = ucard %>" size="40" maxlength="18"></td>
+				</tr>
+				<tr>
+					<td class="td_l_c title">住址</td>
+					<td class="td_l_l" colspan="3"><input name="Address" type="text" class="int" id="Address" value="<% = uAddress %>" size="40"></td>
+				</tr>
+				<tr> 
+					<input name="uid" type="hidden" id="uid" value="<% = uId %>">
+					<td class="td_r_l" colspan="4"><input type="submit" class="button45" name="Submit" value="<%=L_Edit%>"> <input name="Back" type="button" id="Back" class="button43" value=" <%=L_Back%> " onClick="history.back();"></td>
+				</tr>
+            </table>
+			</form>
+		</td>
+	</tr>
+</table>
+<%
+End Sub
+
+Sub saveEditData()
+    Dim uId
+	uId = CLng(ABS(Request("uid")))
+	If Not IsNumeric(uId) Or uId <= 0 Then Response.Write "<script>alert(""员工不存在"");</script>"
+    Dim uPassword,uConfirmPWS,uMobile,uEmail,uAddress,uBirthday,ucard,uaddtime
+	uPassword = Lcase(Request("Password"))
+	uConfirmPWS = Trim(Request("ConfirmPWS"))
+	uMobile = Trim(Request("Mobile"))
+	uEmail = Trim(Request("Email"))
+	uAddress = Trim(Request("Address"))
+	uBirthday = Trim(Request("Birthday"))
+	ucard = Trim(Request("Card"))
+	uaddtime = Trim(Request("Addtime"))	
+	Set rs = Server.CreateObject("ADODB.Recordset")
+	rs.Open "Select Top 1 * From [user] Where uId = " & uId,conn,3,2
+	If rs.RecordCount <> 1 Then Response.Write "<script>alert(""员工不存在"");</script>"
+	if uPassword <> "" then
+	rs("uPassword") = md5(uPassword,16)
+	end if
+	rs("uMobile") = uMobile
+	rs("uEmail") = uEmail
+	rs("uAddress") = uAddress
+	if uBirthday <> "" then 
+	rs("uBirthday") = uBirthday
+	end if
+	rs("ucard") = ucard
+	if uaddtime <> "" then
+	rs("uaddtime") = uaddtime
+	end if
+	rs.Update
+	rs.Close
+	Set rs = Nothing
+	if ""&YNalert&"" = 1 then
+		Response.Write("<script>alert('"&alert2&"');</script>")
+	end if
+	Response.Write("<script>location.href='User_info.asp?uid="&uid&"' ;</script>")
+End Sub
+%>
+</body>
+</html>
+<script src="../data/calendar/WdatePicker.js"></script>
+<% Set EasyCrm = nothing %>
