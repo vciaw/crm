@@ -1,0 +1,679 @@
+/****** 对象:  Table [dbo].[NotDownload] ******/
+SET ANSI_NULLS ON
+
+SET QUOTED_IDENTIFIER ON
+
+SET ANSI_PADDING ON
+
+CREATE TABLE [dbo].[NotDownload](
+	[NotDown] [binary](1) NULL
+) ON [PRIMARY]
+
+SET ANSI_PADDING OFF
+
+
+/****** 对象:  Table [dbo].[AreaData] ******/
+SET ANSI_NULLS ON
+
+SET QUOTED_IDENTIFIER ON
+
+CREATE TABLE [dbo].[AreaData](
+	[aId] [int] IDENTITY(1,1) NOT NULL,
+	[aFId] [nvarchar](50) NULL,
+	[aName] [nvarchar](50) NULL,
+ CONSTRAINT [PK_AreaData] PRIMARY KEY CLUSTERED 
+(
+	[aId] ASC
+)WITH (PAD_INDEX  = OFF, IGNORE_DUP_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+
+
+/****** 对象:  Table [dbo].[Calendar] ******/
+SET ANSI_NULLS ON
+
+SET QUOTED_IDENTIFIER ON
+
+CREATE TABLE [dbo].[Calendar](
+	[ID] [int] IDENTITY(1,1) NOT NULL,
+	[calendarDate] [datetime] NULL,
+	[calendarText] [ntext] NULL,
+	[calendaruser] [nvarchar](50) NULL,
+ CONSTRAINT [PK_Calendar] PRIMARY KEY CLUSTERED 
+(
+	[ID] ASC
+)WITH (PAD_INDEX  = OFF, IGNORE_DUP_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+
+/****** 对象:  Table [dbo].[Client] ******/
+SET ANSI_NULLS ON
+
+SET QUOTED_IDENTIFIER ON
+
+CREATE TABLE [dbo].[Client](
+	[cId] [int] IDENTITY(1,1) NOT NULL,
+	[cdate] [datetime] NULL,
+	[cYn] [int] NULL,
+	[cCompany] [nvarchar](255) NULL,
+	[cArea] [nvarchar](50) NULL,
+	[cSquare] [nvarchar](50) NULL,
+	[cAddress] [nvarchar](255) NULL,
+	[cLinkman] [nvarchar](50) NULL,
+	[cZhiwei] [nvarchar](50) NULL,
+	[cMobile] [nvarchar](50) NULL,
+	[cZip] [nvarchar](50) NULL,
+	[cTel] [nvarchar](50) NULL,
+	[cFax] [nvarchar](50) NULL,
+	[cHomepage] [nvarchar](255) NULL,
+	[cEmail] [nvarchar](255) NULL,
+	[cTrade] [nvarchar](50) NULL,
+	[cStrade] [nvarchar](50) NULL,
+	[cType] [nvarchar](50) NULL,
+	[cStart] [nvarchar](50) NULL,
+	[cSource] [nvarchar](50) NULL,
+	[cInfo] [ntext] NULL,
+	[cUser] [nvarchar](16) NULL,
+	[cGroup] [int] NULL,
+	[cBeizhu] [ntext] NULL,
+	[cOldUser] [nvarchar](50) NULL,
+	[cLastUpdated] [datetime] NULL,
+	[cShare] [int] NULL,
+	[cShareRange] [ntext] NULL,
+	[cService] [nvarchar](50) NULL,
+	[cRNextTime] [datetime] NULL,
+	[cOEDate] [datetime] NULL,
+	[cHEdate] [datetime] NULL,
+ CONSTRAINT [PK_Client] PRIMARY KEY CLUSTERED 
+(
+	[cId] ASC
+)WITH (PAD_INDEX  = OFF, IGNORE_DUP_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+
+/****** 对象:  Table [dbo].[CustomField] ******/
+SET ANSI_NULLS ON
+
+SET QUOTED_IDENTIFIER ON
+
+CREATE TABLE [dbo].[CustomField](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[cTable] [nvarchar](50) NULL,
+	[cTitle] [nvarchar](50) NULL,
+	[cName] [nvarchar](50) NULL,
+	[cType] [nvarchar](50) NULL,
+	[cWidth] [nvarchar](50) NULL,
+	[cContent] [nvarchar](50) NULL,
+	[cList] [int] NULL,
+	[cYn] [int] NULL,
+ CONSTRAINT [PK_CustomField] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX  = OFF, IGNORE_DUP_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+
+
+/****** 对象:  Table [dbo].[CustomFieldContent] ******/
+SET ANSI_NULLS ON
+
+SET QUOTED_IDENTIFIER ON
+
+CREATE TABLE [dbo].[CustomFieldContent](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[cID] [int] NULL,
+	[rID] [int] NULL,
+	[oID] [int] NULL,
+	[hID] [int] NULL,
+	[sID] [int] NULL,
+	[eID] [int] NULL,
+	[cContent] [ntext] NULL,
+ CONSTRAINT [PK_CustomFieldContent] PRIMARY KEY CLUSTERED 
+(
+	[Id] ASC
+)WITH (PAD_INDEX  = OFF, IGNORE_DUP_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+
+/****** 对象:  Table [dbo].[Expense] ******/
+SET ANSI_NULLS ON
+
+SET QUOTED_IDENTIFIER ON
+
+CREATE TABLE [dbo].[Expense](
+	[eId] [int] IDENTITY(1,1) NOT NULL,
+	[cId] [int] NULL,
+	[eDate] [datetime] NULL,
+	[eOutIn] [int] NULL,
+	[eType] [nvarchar](50) NULL,
+	[eMoney] [money] NULL,
+	[eContent] [ntext] NULL,
+	[eUser] [nvarchar](50) NULL,
+	[eTime] [datetime] NULL,
+ CONSTRAINT [PK_Expense] PRIMARY KEY CLUSTERED 
+(
+	[eId] ASC
+)WITH (PAD_INDEX  = OFF, IGNORE_DUP_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+
+/****** 对象:  Table [dbo].[Field_Name] ******/
+SET ANSI_NULLS ON
+
+SET QUOTED_IDENTIFIER ON
+
+CREATE TABLE [dbo].[Field_Name](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[DataTable] [nvarchar](255) NULL,
+	[Field] [nvarchar](255) NULL,
+	[Name] [nvarchar](255) NULL,
+	[Shows] [int] NULL,
+ CONSTRAINT [PK_Field_Name] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX  = OFF, IGNORE_DUP_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+
+
+/****** 对象:  Table [dbo].[File] ******/
+SET ANSI_NULLS ON
+
+SET QUOTED_IDENTIFIER ON
+
+CREATE TABLE [dbo].[File](
+	[fId] [int] IDENTITY(1,1) NOT NULL,
+	[cId] [int] NULL,
+	[fTitle] [nvarchar](255) NULL,
+	[fFile] [nvarchar](255) NULL,
+	[fContent] [ntext] NULL,
+	[fUser] [nvarchar](50) NULL,
+	[fTime] [datetime] NULL,
+ CONSTRAINT [PK_File] PRIMARY KEY CLUSTERED 
+(
+	[fId] ASC
+)WITH (PAD_INDEX  = OFF, IGNORE_DUP_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+
+/****** 对象:  Table [dbo].[Hetong] ******/
+SET ANSI_NULLS ON
+
+SET QUOTED_IDENTIFIER ON
+
+CREATE TABLE [dbo].[Hetong](
+	[hId] [int] IDENTITY(1,1) NOT NULL,
+	[cId] [int] NULL,
+	[oId] [int] NULL,
+	[hNum] [nvarchar](50) NULL,
+	[hSdate] [datetime] NULL,
+	[hEdate] [datetime] NULL,
+	[hType] [nvarchar](50) NULL,
+	[hMoney] [money] NULL,
+	[hRevenue] [money] NULL,
+	[hOwed] [money] NULL,
+	[hInvoice] [nvarchar](50) NULL,
+	[hTax] [nvarchar](50) NULL,
+	[hState] [nvarchar](50) NULL,
+	[hContent] [ntext] NULL,
+	[hAudit] [nvarchar](50) NULL,
+	[hAuditTime] [datetime] NULL,
+	[hAuditReasons] [ntext] NULL,
+	[hUser] [nvarchar](50) NULL,
+	[hTime] [datetime] NULL,
+ CONSTRAINT [PK_Hetong] PRIMARY KEY CLUSTERED 
+(
+	[hId] ASC
+)WITH (PAD_INDEX  = OFF, IGNORE_DUP_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+
+/****** 对象:  Table [dbo].[Hetong_Renew] ******/
+SET ANSI_NULLS ON
+
+SET QUOTED_IDENTIFIER ON
+
+CREATE TABLE [dbo].[Hetong_Renew](
+	[rid] [int] IDENTITY(1,1) NOT NULL,
+	[hID] [int] NULL,
+	[rMoney] [money] NULL,
+	[rRevenue] [money] NULL,
+	[rEdate] [datetime] NULL,
+	[rState] [nvarchar](50) NULL,
+	[rContent] [ntext] NULL,
+	[rAudit] [nvarchar](50) NULL,
+	[rAuditTime] [datetime] NULL,
+	[rAuditReasons] [ntext] NULL,
+	[rUser] [nvarchar](50) NULL,
+	[rTime] [datetime] NULL,
+ CONSTRAINT [PK_Hetong_Renew] PRIMARY KEY CLUSTERED 
+(
+	[rid] ASC
+)WITH (PAD_INDEX  = OFF, IGNORE_DUP_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+
+/****** 对象:  Table [dbo].[Linkmans] ******/
+SET ANSI_NULLS ON
+
+SET QUOTED_IDENTIFIER ON
+
+CREATE TABLE [dbo].[Linkmans](
+	[lId] [int] IDENTITY(1,1) NOT NULL,
+	[cId] [int] NULL,
+	[lName] [nvarchar](50) NULL,
+	[lSex] [nvarchar](255) NULL,
+	[lZhiwei] [nvarchar](50) NULL,
+	[lMobile] [nvarchar](50) NULL,
+	[lQQ] [nvarchar](50) NULL,
+	[lTel] [nvarchar](50) NULL,
+	[lEmail] [nvarchar](255) NULL,
+	[lMSN] [nvarchar](255) NULL,
+	[lALWW] [nvarchar](50) NULL,
+	[lBirthday] [datetime] NULL,
+	[lContent] [ntext] NULL,
+	[lUser] [nvarchar](50) NULL,
+	[lTime] [datetime] NULL,
+ CONSTRAINT [PK_Linkmans_1] PRIMARY KEY CLUSTERED 
+(
+	[lId] ASC
+)WITH (PAD_INDEX  = OFF, IGNORE_DUP_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+
+/****** 对象:  Table [dbo].[Logfile] ******/
+SET ANSI_NULLS ON
+
+SET QUOTED_IDENTIFIER ON
+
+CREATE TABLE [dbo].[Logfile](
+	[lId] [int] IDENTITY(1,1) NOT NULL,
+	[lcId] [int] NULL,
+	[lClass] [nvarchar](50) NULL,
+	[lAction] [nvarchar](50) NULL,
+	[lReason] [ntext] NULL,
+	[lUser] [nvarchar](50) NULL,
+	[lTime] [datetime] NULL,
+ CONSTRAINT [PK_Logfile] PRIMARY KEY CLUSTERED 
+(
+	[lId] ASC
+)WITH (PAD_INDEX  = OFF, IGNORE_DUP_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+
+/****** 对象:  Table [dbo].[OA_mms_Receive] ******/
+SET ANSI_NULLS ON
+
+SET QUOTED_IDENTIFIER ON
+
+CREATE TABLE [dbo].[OA_mms_Receive](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[oReceiver] [nvarchar](255) NULL,
+	[oSender] [nvarchar](50) NULL,
+	[oTitle] [nvarchar](255) NULL,
+	[oContent] [ntext] NULL,
+	[oIsread] [int] NULL,
+	[oAttime] [datetime] NULL,
+	[oTime] [datetime] NULL,
+ CONSTRAINT [PK_OA_mms_Receive] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX  = OFF, IGNORE_DUP_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+
+/****** 对象:  Table [dbo].[OA_mms_send] ******/
+SET ANSI_NULLS ON
+
+SET QUOTED_IDENTIFIER ON
+
+CREATE TABLE [dbo].[OA_mms_send](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[oReceiver] [nvarchar](255) NULL,
+	[oSender] [nvarchar](50) NULL,
+	[oTitle] [nvarchar](255) NULL,
+	[oContent] [ntext] NULL,
+	[oIsread] [int] NULL,
+	[oTime] [datetime] NULL,
+ CONSTRAINT [PK_OA_mms_send] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX  = OFF, IGNORE_DUP_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+
+/****** 对象:  Table [dbo].[OA_Notice] ******/
+SET ANSI_NULLS ON
+
+SET QUOTED_IDENTIFIER ON
+
+CREATE TABLE [dbo].[OA_Notice](
+	[oNid] [int] IDENTITY(1,1) NOT NULL,
+	[oSendto] [nvarchar](255) NULL,
+	[oNclass] [nvarchar](50) NULL,
+	[oNStar] [int] NULL,
+	[oNtitle] [nvarchar](255) NULL,
+	[oNcontent] [ntext] NULL,
+	[oNIsread] [int] NULL,
+	[oNuser] [nvarchar](50) NULL,
+	[oNedittime] [datetime] NULL,
+	[oNaddtime] [datetime] NULL ,
+ CONSTRAINT [PK_OA_Notice] PRIMARY KEY CLUSTERED 
+(
+	[oNid] ASC
+)WITH (PAD_INDEX  = OFF, IGNORE_DUP_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+
+/****** 对象:  Table [dbo].[OA_Report] ******/
+SET ANSI_NULLS ON
+
+SET QUOTED_IDENTIFIER ON
+
+CREATE TABLE [dbo].[OA_Report](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[oSendto] [nvarchar](255) NULL,
+	[oClass] [nvarchar](50) NULL,
+	[oTitle] [nvarchar](50) NULL,
+	[oReport] [ntext] NULL,
+	[oPlan] [ntext] NULL,
+	[oReply] [ntext] NULL,
+	[oUser] [nvarchar](50) NULL,
+	[oIsread] [int] NULL,
+	[oTime] [datetime] NULL,
+ CONSTRAINT [PK_OA_Report] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX  = OFF, IGNORE_DUP_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+
+/****** 对象:  Table [dbo].[OA_soft] ******/
+SET ANSI_NULLS ON
+
+SET QUOTED_IDENTIFIER ON
+
+CREATE TABLE [dbo].[OA_soft](
+	[sId] [int] IDENTITY(1,1) NOT NULL,
+	[s_class] [nvarchar](50) NULL,
+	[s_title] [nvarchar](50) NULL,
+	[s_file] [nvarchar](255) NULL,
+	[s_user] [nvarchar](50) NULL,
+	[s_share] [int] NULL,
+	[s_time] [datetime] NULL,
+	[s_content] [ntext] NULL,
+ CONSTRAINT [PK_OA_soft] PRIMARY KEY CLUSTERED 
+(
+	[sId] ASC
+)WITH (PAD_INDEX  = OFF, IGNORE_DUP_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+
+/****** 对象:  Table [dbo].[Order] ******/
+SET ANSI_NULLS ON
+
+SET QUOTED_IDENTIFIER ON
+
+CREATE TABLE [dbo].[Order](
+	[oid] [int] IDENTITY(1,1) NOT NULL,
+	[cId] [int] NULL,
+	[oCode] [nvarchar](50) NULL,
+	[oLinkman] [nvarchar](50) NULL,
+	[oSDate] [datetime] NULL,
+	[oEDate] [datetime] NULL,
+	[oDeposit] [money] NULL,
+	[oMoney] [money] NULL,
+	[oState] [int] NULL,
+	[oContent] [ntext] NULL,
+	[oUser] [nvarchar](50) NULL,
+	[oTime] [datetime] NULL,
+	[oAuditReasons] [nvarchar](255) NULL,
+ CONSTRAINT [PK_Order] PRIMARY KEY CLUSTERED 
+(
+	[oid] ASC
+)WITH (PAD_INDEX  = OFF, IGNORE_DUP_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+
+/****** 对象:  Table [dbo].[Order_Products] ******/
+SET ANSI_NULLS ON
+
+SET QUOTED_IDENTIFIER ON
+
+CREATE TABLE [dbo].[Order_Products](
+	[osId] [int] IDENTITY(1,1) NOT NULL,
+	[oId] [int] NULL,
+	[cId] [int] NULL,
+	[ProId] [int] NULL,
+	[oProNum] [int] NULL,
+	[oDiscount] [money] NULL,
+	[oMoney] [money] NULL,
+	[oContent] [ntext] NULL,
+	[oUser] [nvarchar](50) NULL,
+	[oTime] [datetime] NULL,
+ CONSTRAINT [PK_Order_Products] PRIMARY KEY CLUSTERED 
+(
+	[osId] ASC
+)WITH (PAD_INDEX  = OFF, IGNORE_DUP_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+
+/****** 对象:  Table [dbo].[Plugin] ******/
+SET ANSI_NULLS ON
+
+SET QUOTED_IDENTIFIER ON
+
+CREATE TABLE [dbo].[Plugin](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[pSort] [int] NULL,
+	[pTitle] [nvarchar](50) NULL,
+	[pUrl] [nvarchar](255) NULL,
+	[pAuthor] [nvarchar](50) NULL,
+	[pVersion] [nvarchar](50) NULL,
+	[pContent] [nvarchar](255) NULL,
+	[pTime] [datetime] NULL,
+	[pYn] [int] NULL,
+	[QuickYN] [int] NULL,
+ CONSTRAINT [PK_Plugin] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX  = OFF, IGNORE_DUP_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+
+
+/****** 对象:  Table [dbo].[ProductClass] ******/
+SET ANSI_NULLS ON
+
+SET QUOTED_IDENTIFIER ON
+
+CREATE TABLE [dbo].[ProductClass](
+	[pClassId] [int] IDENTITY(1,1) NOT NULL,
+	[pClassFid] [nvarchar](50) NULL,
+	[pClassname] [nvarchar](50) NULL,
+ CONSTRAINT [PK_ProductClass] PRIMARY KEY CLUSTERED 
+(
+	[pClassId] ASC
+)WITH (PAD_INDEX  = OFF, IGNORE_DUP_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+
+
+/****** 对象:  Table [dbo].[Products] ******/
+SET ANSI_NULLS ON
+
+SET QUOTED_IDENTIFIER ON
+
+CREATE TABLE [dbo].[Products](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[pBigClass] [nvarchar](255) NULL,
+	[pSmallClass] [nvarchar](255) NULL,
+	[pTitle] [nvarchar](255) NULL,
+	[pItemA] [nvarchar](255) NULL,
+	[pItemB] [nvarchar](255) NULL,
+	[pItemC] [nvarchar](255) NULL,
+	[pItemD] [nvarchar](255) NULL,
+	[pItemE] [nvarchar](255) NULL,
+	[pUprice] [money] NULL,
+ CONSTRAINT [PK_Products] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX  = OFF, IGNORE_DUP_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+
+
+/****** 对象:  Table [dbo].[QuickMenu] ******/
+SET ANSI_NULLS ON
+
+SET QUOTED_IDENTIFIER ON
+
+CREATE TABLE [dbo].[QuickMenu](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[Sort] [int] NULL,
+	[Title] [nvarchar](50) NULL,
+	[Url] [nvarchar](255) NULL,
+	[QuickYN] [int] NULL,
+ CONSTRAINT [PK_QuickMenu] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX  = OFF, IGNORE_DUP_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+
+
+/****** 对象:  Table [dbo].[Records] ******/
+SET ANSI_NULLS ON
+
+SET QUOTED_IDENTIFIER ON
+
+CREATE TABLE [dbo].[Records](
+	[rId] [int] IDENTITY(1,1) NOT NULL,
+	[cId] [int] NULL,
+	[rType] [nvarchar](50) NULL,
+	[rState] [nvarchar](50) NULL,
+	[rLinkman] [nvarchar](50) NULL,
+	[rNextTime] [datetime] NULL,
+	[rRemind] [int] NULL,
+	[rContent] [ntext] NULL,
+	[rUser] [nvarchar](50) NULL,
+	[rTime] [datetime] NULL,
+ CONSTRAINT [PK_Records] PRIMARY KEY CLUSTERED 
+(
+	[rId] ASC
+)WITH (PAD_INDEX  = OFF, IGNORE_DUP_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+
+/****** 对象:  Table [dbo].[SelectData] ******/
+SET ANSI_NULLS ON
+
+SET QUOTED_IDENTIFIER ON
+
+CREATE TABLE [dbo].[SelectData](
+	[SelectID] [int] IDENTITY(1,1) NOT NULL,
+	[Select_Type] [nvarchar](50) NULL,
+	[Select_Star] [nvarchar](50) NULL,
+	[Select_Source] [nvarchar](50) NULL,
+	[Select_Zhiwei] [nvarchar](50) NULL,
+	[Select_Sex] [nvarchar](50) NULL,
+	[Select_Records] [nvarchar](50) NULL,
+	[Select_Hetong] [nvarchar](50) NULL,
+	[Select_Service] [nvarchar](50) NULL,
+	[Select_YN] [nvarchar](50) NULL,
+	[Select_SoftClass] [nvarchar](50) NULL,
+	[Select_NoticeClass] [nvarchar](50) NULL,
+	[Select_ExpenseIN] [nvarchar](50) NULL,
+	[Select_ExpenseOUT] [nvarchar](50) NULL,
+ CONSTRAINT [PK_SelectData] PRIMARY KEY CLUSTERED 
+(
+	[SelectID] ASC
+)WITH (PAD_INDEX  = OFF, IGNORE_DUP_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]
+
+
+/****** 对象:  Table [dbo].[Service] ******/
+SET ANSI_NULLS ON
+
+SET QUOTED_IDENTIFIER ON
+
+CREATE TABLE [dbo].[Service](
+	[sid] [int] IDENTITY(1,1) NOT NULL,
+	[cId] [int] NULL,
+	[ProId] [int] NULL,
+	[sTitle] [nvarchar](255) NULL,
+	[sLinkman] [nvarchar](50) NULL,
+	[sType] [nvarchar](50) NULL,
+	[sSDate] [datetime] NULL,
+	[sEDate] [datetime] NULL,
+	[sContent] [ntext] NULL,
+	[sSolve] [int] NULL,
+	[sInfo] [ntext] NULL,
+	[sUser] [nvarchar](50) NULL,
+	[sTime] [datetime] NULL,
+ CONSTRAINT [PK_Service] PRIMARY KEY CLUSTERED 
+(
+	[sid] ASC
+)WITH (PAD_INDEX  = OFF, IGNORE_DUP_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+
+/****** 对象:  Table [dbo].[system_group] ******/
+SET ANSI_NULLS ON
+
+SET QUOTED_IDENTIFIER ON
+
+CREATE TABLE [dbo].[system_group](
+	[gId] [tinyint] NULL ,
+	[gName] [nvarchar](24) NULL
+) ON [PRIMARY]
+
+
+/****** 对象:  Table [dbo].[system_level] ******/
+SET ANSI_NULLS ON
+
+SET QUOTED_IDENTIFIER ON
+
+CREATE TABLE [dbo].[system_level](
+	[lId] [tinyint] NULL,
+	[lName] [nvarchar](16) NULL,
+	[lQxfalg] [nvarchar](255) NULL
+) ON [PRIMARY]
+
+
+/****** 对象:  Table [dbo].[user] ******/
+SET ANSI_NULLS ON
+
+SET QUOTED_IDENTIFIER ON
+
+CREATE TABLE [dbo].[user](
+	[uId] [int] IDENTITY(1,1) NOT NULL,
+	[uAccount] [nvarchar](16) NULL,
+	[uPassword] [nvarchar](16) NULL,
+	[uName] [nvarchar](16) NULL,
+	[uGroup] [int] NULL,
+	[uLevel] [int] NULL,
+	[uQxflag] [nvarchar](255) NULL,
+	[uMobile] [nvarchar](50) NULL,
+	[uEmail] [nvarchar](255) NULL,
+	[uAddress] [nvarchar](255) NULL,
+	[uBirthday] [datetime] NULL,
+	[uCard] [nvarchar](18) NULL,
+	[uAddtime] [datetime] NULL,
+	[uManagerange] [ntext] NULL,
+	[uClientNum] [int] NULL,
+ CONSTRAINT [PK_user] PRIMARY KEY CLUSTERED 
+(
+	[uId] ASC
+)WITH (PAD_INDEX  = OFF, IGNORE_DUP_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY] TEXTIMAGE_ON [PRIMARY]
+
+
+/****** 对象:  Table [dbo].[userlog] ******/
+SET ANSI_NULLS ON
+
+SET QUOTED_IDENTIFIER ON
+
+CREATE TABLE [dbo].[userlog](
+	[id] [int] IDENTITY(1,1) NOT NULL,
+	[olname] [nvarchar](50) NULL,
+	[olstarttime] [datetime] NULL,
+	[olip] [nvarchar](50) NULL,
+ CONSTRAINT [PK_userlog] PRIMARY KEY CLUSTERED 
+(
+	[id] ASC
+)WITH (PAD_INDEX  = OFF, IGNORE_DUP_KEY = OFF) ON [PRIMARY]
+) ON [PRIMARY]

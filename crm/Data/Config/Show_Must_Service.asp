@@ -1,0 +1,16 @@
+<%
+Service_ProId=1
+Service_sTitle=1
+Service_sLinkman=1
+Service_sType=1
+Service_sSDate=1
+Service_sContent=1
+Service_sSolve=1
+Service_sInfo=1
+Must_Service_ProId=0
+Must_Service_sTitle=0
+Must_Service_sType=0
+Must_Service_sLinkman=0
+Must_Service_sSDate=0
+Must_Service_sContent=0
+%>

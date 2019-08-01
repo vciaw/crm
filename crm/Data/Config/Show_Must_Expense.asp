@@ -1,0 +1,13 @@
+<%
+Expense_eDate=1
+Expense_eOutIn=1
+Expense_eType=1
+Expense_eMoney=1
+Expense_eContent=1
+Expense_eUser=0
+Expense_eTime=0
+Must_Expense_eDate=0
+Must_Expense_eType=0
+Must_Expense_eMoney=0
+Must_Expense_eContent=0
+%>
