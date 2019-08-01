@@ -20,7 +20,7 @@ ID = Trim(Request("ID"))
 tipinfo = Trim(Request("tipinfo"))
 YNRange = Trim(Request("YNRange"))
 
-'½ûÖ¹Ö±½Ó´ò¿ª×Ó´°¿Ú
+'ç¦æ­¢ç›´æ¥æ‰“å¼€å­çª—å£
 From_url = Cstr(Request.ServerVariables("HTTP_Referer"))
 Serv_url = Cstr(Request.ServerVariables("Server_Name"))
 If mid(From_url,8,len(Serv_url)) <> Serv_url Then
@@ -34,14 +34,14 @@ Case "Client"
 End Select
 
 
-Sub Client() '¿Í»§µµ°¸
+Sub Client() 'å®¢æˆ·æ¡£æ¡ˆ
 	cid = Trim(Request("cid"))
 	if tipinfo<>"" then
 		Response.Write("<script>art.dialog({title: 'Error',time: 1,icon: 'warning',content: '"&tipinfo&"'});</script>")
 	end if
 %>
 	<script language="JavaScript">
-	<!-- ¿Í»§µµ°¸±ØÌîÏîÌáÊ¾
+	<!-- å®¢æˆ·æ¡£æ¡ˆå¿…å¡«é¡¹æç¤º
 	function CheckInput()
 	{
 		if (<%=Must_Client_cCompany%>=="1"){if(document.all.Company.value == ""){art.dialog({title: 'Error',time: 1,icon: 'warning',content: '<%=L_Client_cCompany & alert04%>'});document.all.Company.focus();return false;}}
@@ -67,7 +67,7 @@ Sub Client() '¿Í»§µµ°¸
 	-->
 	</script>
 <%
-if sType="Add" then 'Ìí¼Ó
+if sType="Add" then 'æ·»åŠ 
 %>
 <% If mid(Session("CRM_qx"), 17, 1) = 1 Then %>
 <script language="javascript" src="<%=SiteUrl&skinurl%>Js/ajax.js"></script>
@@ -77,14 +77,14 @@ if sType="Add" then 'Ìí¼Ó
 	<tr>
 		<td class="top_left td_t_n td_r_n"><%=L_Top_View_Company%>  (<font color="#FF0000">*</font>)</td>
 		<td class="top_right td_t_n td_r_n">
-			<input type="button" class="button_top_reload" value=" " title="Ë¢ĞÂ" onClick=window.location.href="javascript:window.location.reload();" />
+			<input type="button" class="button_top_reload" value=" " title="åˆ·æ–°" onClick=window.location.href="javascript:window.location.reload();" />
 			<% If mid(Session("CRM_qx"), 5, 1) = 1 Then %>
-			<input type="button" class="button_top_set" value=" " title="±ØÌîÏîÉèÖÃ" onclick='Setting_Client_AddMust()' style="cursor:pointer" />
+			<input type="button" class="button_top_set" value=" " title="å¿…å¡«é¡¹è®¾ç½®" onclick='Setting_Client_AddMust()' style="cursor:pointer" />
 			<%end if%>
         </td>
 	</tr>
 </table>
-<script>function Setting_Client_AddMust() {$.dialog.open('../system/GetUpdate.asp?action=Setting&sType=ClientAddMust', {title: '×Ô¶¨ÒåÉèÖÃ', width: 800, height: 480,fixed: true}); };</script>
+<script>function Setting_Client_AddMust() {$.dialog.open('../system/GetUpdate.asp?action=Setting&sType=ClientAddMust', {title: 'è‡ªå®šä¹‰è®¾ç½®', width: 800, height: 480,fixed: true}); };</script>
 	
 			<table width="100%" border="0" cellpadding="0" cellspacing="0"> 
 				<form name="Add" action="?action=Client&sType=SaveAdd" method="post" onSubmit="return CheckInput();">
@@ -122,15 +122,15 @@ if sType="Add" then 'Ìí¼Ó
 											<option value=""><%=L_Please_choose_02%></option>
 										</select>
 										
-									</span>¡¡
+									</span>ã€€
 								<input name="Square" type="hidden" id="Square" class="int">
-								<input name="Address" type="text" class="int" id="Address" size="30">¡¡
-								 <%if Must_Client_cZip = 1 then %><font color="#FF0000">*</font> <%end if%> <%=L_Client_cZip%>£º <input name="Zip" type="text" class="int" id="Zip" size="10" maxlength="6" onkeyup='this.value=this.value.replace(/\D/gi,"")'> <span class="info_help help01" onmouseover="tip.start(this)" tips="<%=L_Tip_Info_06%>">&nbsp;</span>
+								<input name="Address" type="text" class="int" id="Address" size="30">ã€€
+								 <%if Must_Client_cZip = 1 then %><font color="#FF0000">*</font> <%end if%> <%=L_Client_cZip%>ï¼š <input name="Zip" type="text" class="int" id="Zip" size="10" maxlength="6" onkeyup='this.value=this.value.replace(/\D/gi,"")'> <span class="info_help help01" onmouseover="tip.start(this)" tips="<%=L_Tip_Info_06%>">&nbsp;</span>
 								</td>
 							</tr>
 							<tr> 
 								<td class="td_l_r title"><%if Must_Client_cLinkman = 1 then %><font color="#FF0000">*</font> <%end if%> <%=L_Client_cLinkman%></td>
-							  <td class="td_r_l"> <input name="Linkman" type="text" class="int" id="Linkman" size="10">¡¡ <%if Must_Client_cZhiwei = 1 then %><font color="#FF0000">*</font> <%end if%><%=L_Client_cZhiwei%>£º<% = EasyCrm.getSelect("SelectData","Select_Zhiwei","Zhiwei","") %>&nbsp;<% If mid(Session("CRM_qx"), 6, 1) = 1 Then %><input name="Back" type="button" id="Back" class="button227" value="ĞÂÔö" onclick='Select_Zhiwei_InfoAdd()' style="cursor:pointer"><script>function Select_Zhiwei_InfoAdd() {$.dialog.open('../System/GetUpdate.asp?action=SelectData&sType=Add&oType=Select_Zhiwei', {title: 'ĞÂ´°¿Ú', width: 400, height: 140,fixed: true}); };</script><%end if%></td>
+							  <td class="td_r_l"> <input name="Linkman" type="text" class="int" id="Linkman" size="10">ã€€ <%if Must_Client_cZhiwei = 1 then %><font color="#FF0000">*</font> <%end if%><%=L_Client_cZhiwei%>ï¼š<% = EasyCrm.getSelect("SelectData","Select_Zhiwei","Zhiwei","") %>&nbsp;<% If mid(Session("CRM_qx"), 6, 1) = 1 Then %><input name="Back" type="button" id="Back" class="button227" value="æ–°å¢" onclick='Select_Zhiwei_InfoAdd()' style="cursor:pointer"><script>function Select_Zhiwei_InfoAdd() {$.dialog.open('../System/GetUpdate.asp?action=SelectData&sType=Add&oType=Select_Zhiwei', {title: 'æ–°çª—å£', width: 400, height: 140,fixed: true}); };</script><%end if%></td>
 								<td class="td_l_r title"><%if Must_Client_cMobile = 1 then %><font color="#FF0000">*</font> <%end if%> <%=L_Client_cMobile%></td>
 								<td class="td_r_l" colspan="3"> <input name="Mobile" type="text" class="int" id="Mobile" size="30" onkeyup='this.value=this.value.replace(/\D/gi,"")'> <span class="info_help help01" onmouseover="tip.start(this)" tips="<%=L_Tip_Info_06%>">&nbsp;</span></td>
 							</tr>
@@ -175,13 +175,13 @@ if sType="Add" then 'Ìí¼Ó
 									<input name="Strade" type="hidden" id="Strade">
 								</td>
 								<td class="td_l_r title"><%if Must_Client_cType = 1 then %><font color="#FF0000">*</font> <%end if%> <%=L_Client_cType%></td>
-								<td class="td_r_l"> <% = EasyCrm.getSelect("SelectData","Select_Type","Type","") %>&nbsp;<% If mid(Session("CRM_qx"), 6, 1) = 1 Then %><input name="Back" type="button" id="Back" class="button227" value="ĞÂÔö" onclick='Select_Type_InfoAdd()' style="cursor:pointer"><script>function Select_Type_InfoAdd() {$.dialog.open('../System/GetUpdate.asp?action=SelectData&sType=Add&oType=Select_Type', {title: 'ĞÂ´°¿Ú', width: 400, height: 140,fixed: true}); };</script><%end if%></td>
+								<td class="td_r_l"> <% = EasyCrm.getSelect("SelectData","Select_Type","Type","") %>&nbsp;<% If mid(Session("CRM_qx"), 6, 1) = 1 Then %><input name="Back" type="button" id="Back" class="button227" value="æ–°å¢" onclick='Select_Type_InfoAdd()' style="cursor:pointer"><script>function Select_Type_InfoAdd() {$.dialog.open('../System/GetUpdate.asp?action=SelectData&sType=Add&oType=Select_Type', {title: 'æ–°çª—å£', width: 400, height: 140,fixed: true}); };</script><%end if%></td>
 							</tr>
 							<tr> 
 								<td class="td_l_r title" <%if Hidden_Client_cStart=1 then%>style="display:none;"<%end if%> ><%if Must_Client_cStart = 1 then %><font color="#FF0000">*</font> <%end if%> <%=L_Client_cStart%></td>
-								<td class="td_r_l" <%if Hidden_Client_cStart=1 then%>style="display:none;"<%end if%> > <% = EasyCrm.getSelect("SelectData","Select_Star","Start","") %>&nbsp;<% If mid(Session("CRM_qx"), 6, 1) = 1 Then %><input name="Back" type="button" id="Back" class="button227" value="ĞÂÔö" onclick='Select_Star_InfoAdd()' style="cursor:pointer"><script>function Select_Star_InfoAdd() {$.dialog.open('../System/GetUpdate.asp?action=SelectData&sType=Add&oType=Select_Star', {title: 'ĞÂ´°¿Ú', width: 400, height: 140,fixed: true}); };</script><%end if%></td>
+								<td class="td_r_l" <%if Hidden_Client_cStart=1 then%>style="display:none;"<%end if%> > <% = EasyCrm.getSelect("SelectData","Select_Star","Start","") %>&nbsp;<% If mid(Session("CRM_qx"), 6, 1) = 1 Then %><input name="Back" type="button" id="Back" class="button227" value="æ–°å¢" onclick='Select_Star_InfoAdd()' style="cursor:pointer"><script>function Select_Star_InfoAdd() {$.dialog.open('../System/GetUpdate.asp?action=SelectData&sType=Add&oType=Select_Star', {title: 'æ–°çª—å£', width: 400, height: 140,fixed: true}); };</script><%end if%></td>
 								<td class="td_l_r title" <%if Hidden_Client_cSource=1 then%>style="display:none;"<%end if%> ><%if Must_Client_cSource = 1 then %><font color="#FF0000">*</font> <%end if%> <%=L_Client_cSource%></td>
-								<td class="td_r_l" <%if Hidden_Client_cSource=1 then%>style="display:none;"<%end if%> > <% = EasyCrm.getSelect("SelectData","Select_Source","Source","") %>&nbsp;<% If mid(Session("CRM_qx"), 6, 1) = 1 Then %><input name="Back" type="button" id="Back" class="button227" value="ĞÂÔö" onclick='Select_Source_InfoAdd()' style="cursor:pointer"><script>function Select_Source_InfoAdd() {$.dialog.open('../System/GetUpdate.asp?action=SelectData&sType=Add&oType=Select_Source', {title: 'ĞÂ´°¿Ú', width: 400, height: 140,fixed: true}); };</script><%end if%></td>
+								<td class="td_r_l" <%if Hidden_Client_cSource=1 then%>style="display:none;"<%end if%> > <% = EasyCrm.getSelect("SelectData","Select_Source","Source","") %>&nbsp;<% If mid(Session("CRM_qx"), 6, 1) = 1 Then %><input name="Back" type="button" id="Back" class="button227" value="æ–°å¢" onclick='Select_Source_InfoAdd()' style="cursor:pointer"><script>function Select_Source_InfoAdd() {$.dialog.open('../System/GetUpdate.asp?action=SelectData&sType=Add&oType=Select_Source', {title: 'æ–°çª—å£', width: 400, height: 140,fixed: true}); };</script><%end if%></td>
 							</tr>
 							
 								<%
@@ -212,14 +212,14 @@ if sType="Add" then 'Ìí¼Ó
 											<%
 											checkboxstr = split(""&rss("cContent")&"",",")
 											for checkboxarr = 0 to ubound(checkboxstr)
-											response.Write "<input name="""&rss("cName")&""" type=""checkbox"" value="""&checkboxstr(checkboxarr)&"""> "&checkboxstr(checkboxarr)&"¡¡"
+											response.Write "<input name="""&rss("cName")&""" type=""checkbox"" value="""&checkboxstr(checkboxarr)&"""> "&checkboxstr(checkboxarr)&"ã€€"
 											next
 											%>
 										<%elseif rss("cType") = "radio" then%>
 											<%
 											radiostr = split(""&rss("cContent")&"",",")
 											for radioarr = 0 to ubound(radiostr)
-											response.Write "<input name="""&rss("cName")&""" type=""radio"" value="""&radiostr(radioarr)&"""> "&radiostr(radioarr)&"¡¡"
+											response.Write "<input name="""&rss("cName")&""" type=""radio"" value="""&radiostr(radioarr)&"""> "&radiostr(radioarr)&"ã€€"
 											next
 											%>
 										<%end if%>
@@ -251,8 +251,8 @@ if sType="Add" then 'Ìí¼Ó
 		<td valign="top" class="td_n Bottom_pd "> 
 			<input name="User" type="hidden" value="<%=Session("CRM_name")%>">
 			<input name="Group" type="hidden" value="<%=Session("CRM_group")%>">
-			<input type="submit" name="Submit" class="button45" value="±£´æ">¡¡
-			<input name="Back" type="button" id="Back" class="button43" value="¹Ø±Õ" onClick="art.dialog.close();">
+			<input type="submit" name="Submit" class="button45" value="ä¿å­˜">ã€€
+			<input name="Back" type="button" id="Back" class="button43" value="å…³é—­" onClick="art.dialog.close();">
 		</td>
 	</tr>
 </table>
@@ -337,7 +337,7 @@ elseif sType="SaveAdd" then
 	rs("cGroup") = cGroup
 	rs("cLastUpdated") = now()
 	
-	'Ğ´ÈëÄ¬ÈÏÖµ
+	'å†™å…¥é»˜è®¤å€¼
 	rs("cDate") = Date()
 	rs("cYn") = 1
 	rs("cShare") = 0
@@ -356,10 +356,10 @@ elseif sType="SaveAdd" then
 	cid=rsid("cid")
 	rsid.close
 	
-	'²åÈëÁªÏµÈË±í
+	'æ’å…¥è”ç³»äººè¡¨
 	conn.execute ("insert into Linkmans(cid,lName,lZhiwei,lMobile,lUser,lTime) values('"&cid&"','"&cLinkman&"','"&cZhiwei&"','"&cMobile&"','"&cUser&"','"&now()&"')")	
 	
-	'²åÈë×Ô¶¨ÒåÄÚÈİ
+	'æ’å…¥è‡ªå®šä¹‰å†…å®¹
 	
 	cContent = ""
 	Set rsc = Server.CreateObject("ADODB.Recordset")
@@ -377,7 +377,7 @@ elseif sType="SaveAdd" then
 	
 	conn.execute ("insert into CustomFieldContent(cID,cContent) values('"&cid&"','"&cContent&"')")	
 	
-	'²åÈë²Ù×÷¼ÇÂ¼
+	'æ’å…¥æ“ä½œè®°å½•
 	conn.execute ("insert into Logfile(lCid,lClass,lAction,lUser,lTime) values('"&cid&"','"&L_Client&"','"&L_insert_action_01&"','"&cUser&"','"&now()&"')")	
 
 	Response.Write("<script>art.dialog.close();art.dialog.open.origin.location.reload();</script>")
@@ -392,14 +392,14 @@ elseif sType="InfoEdit" then
 	<tr>
 		<td class="top_left td_t_n td_r_n"><%=L_Top_View_Company%>  (<font color="#FF0000">*</font>)</td>
 		<td class="top_right td_t_n td_r_n">
-			<input type="button" class="button_top_reload" value=" " title="Ë¢ĞÂ" onClick=window.location.href="javascript:window.location.reload();" />
+			<input type="button" class="button_top_reload" value=" " title="åˆ·æ–°" onClick=window.location.href="javascript:window.location.reload();" />
 			<% If mid(Session("CRM_qx"), 5, 1) = 1 Then %>
-			<input type="button" class="button_top_set" value=" " title="±ØÌîÏîÉèÖÃ" onclick='Setting_Client_AddMust()' style="cursor:pointer" />
+			<input type="button" class="button_top_set" value=" " title="å¿…å¡«é¡¹è®¾ç½®" onclick='Setting_Client_AddMust()' style="cursor:pointer" />
 			<%end if%>
         </td>
 	</tr>
 </table>
-<script>function Setting_Client_AddMust() {$.dialog.open('../system/GetUpdate.asp?action=Setting&sType=ClientAddMust', {title: '×Ô¶¨ÒåÉèÖÃ', width: 800, height: 480,fixed: true}); };</script>
+<script>function Setting_Client_AddMust() {$.dialog.open('../system/GetUpdate.asp?action=Setting&sType=ClientAddMust', {title: 'è‡ªå®šä¹‰è®¾ç½®', width: 800, height: 480,fixed: true}); };</script>
 	
 			<table width="100%" border="0" cellpadding="0" cellspacing="0"> 
 				<form name="Add" action="?action=Client&sType=SaveEdit" method="post"onSubmit="return CheckInput();">
@@ -451,15 +451,15 @@ elseif sType="InfoEdit" then
 											End If
 											%>
 										</select>
-									</span>¡¡
+									</span>ã€€
 								<input name="Square" type="hidden" id="Square" value="<% = EasyCrm.getNewItem("Client","cID",""&cID&"","cSquare") %>">
-								<input name="Address" type="text" class="int" id="Address" size="30" value="<%=EasyCrm.getNewItem("Client","cID",""&cID&"","cAddress")%>" >¡¡
-								 <%if Must_Client_cZip = 1 then %><font color="#FF0000">*</font> <%end if%> <%=L_Client_cZip%>£º <input name="Zip" type="text" class="int" id="Zip" size="10" maxlength="6" onkeyup='this.value=this.value.replace(/\D/gi,"")' value="<%=EasyCrm.getNewItem("Client","cID",""&cID&"","cZip")%>" > <span class="info_help help01" onmouseover="tip.start(this)" tips="<%=L_Tip_Info_06%>">&nbsp;</span>
+								<input name="Address" type="text" class="int" id="Address" size="30" value="<%=EasyCrm.getNewItem("Client","cID",""&cID&"","cAddress")%>" >ã€€
+								 <%if Must_Client_cZip = 1 then %><font color="#FF0000">*</font> <%end if%> <%=L_Client_cZip%>ï¼š <input name="Zip" type="text" class="int" id="Zip" size="10" maxlength="6" onkeyup='this.value=this.value.replace(/\D/gi,"")' value="<%=EasyCrm.getNewItem("Client","cID",""&cID&"","cZip")%>" > <span class="info_help help01" onmouseover="tip.start(this)" tips="<%=L_Tip_Info_06%>">&nbsp;</span>
 								</td>
 							</tr>
 							<tr> 
 								<td class="td_l_r title"><%if Must_Client_cLinkman = 1 then %><font color="#FF0000">*</font> <%end if%> <%=L_Client_cLinkman%></td>
-							  <td class="td_r_l"> <input name="Linkman" type="text" class="int" id="Linkman" size="10" value="<%=EasyCrm.getNewItem("Client","cID",""&cID&"","cLinkman")%>" >¡¡ <%if Must_Client_cZhiwei = 1 then %><font color="#FF0000">*</font> <%end if%><%=L_Client_cZhiwei%>£º<% = EasyCrm.getSelect("SelectData","Select_Zhiwei","Zhiwei",""&EasyCrm.getNewItem("Client","cID",""&cID&"","cZhiwei")&"") %> <% If mid(Session("CRM_qx"), 6, 1) = 1 Then %><input name="Back" type="button" id="Back" class="button227" value="ĞÂÔö" onclick='Select_Zhiwei_InfoAdd()' style="cursor:pointer"><script>function Select_Zhiwei_InfoAdd() {$.dialog.open('../System/GetUpdate.asp?action=SelectData&sType=Add&oType=Select_Zhiwei', {title: 'ĞÂ´°¿Ú', width: 400, height: 140,fixed: true}); };</script><%end if%></td>
+							  <td class="td_r_l"> <input name="Linkman" type="text" class="int" id="Linkman" size="10" value="<%=EasyCrm.getNewItem("Client","cID",""&cID&"","cLinkman")%>" >ã€€ <%if Must_Client_cZhiwei = 1 then %><font color="#FF0000">*</font> <%end if%><%=L_Client_cZhiwei%>ï¼š<% = EasyCrm.getSelect("SelectData","Select_Zhiwei","Zhiwei",""&EasyCrm.getNewItem("Client","cID",""&cID&"","cZhiwei")&"") %> <% If mid(Session("CRM_qx"), 6, 1) = 1 Then %><input name="Back" type="button" id="Back" class="button227" value="æ–°å¢" onclick='Select_Zhiwei_InfoAdd()' style="cursor:pointer"><script>function Select_Zhiwei_InfoAdd() {$.dialog.open('../System/GetUpdate.asp?action=SelectData&sType=Add&oType=Select_Zhiwei', {title: 'æ–°çª—å£', width: 400, height: 140,fixed: true}); };</script><%end if%></td>
 								<td class="td_l_r title"><%if Must_Client_cMobile = 1 then %><font color="#FF0000">*</font> <%end if%> <%=L_Client_cMobile%></td>
 								<td class="td_r_l" colspan="3"> <input name="Mobile" type="text" class="int" id="Mobile" size="30" value="<%=EasyCrm.getNewItem("Client","cID",""&cID&"","cMobile")%>"  onkeyup='this.value=this.value.replace(/\D/gi,"")'> <span class="info_help help01" onmouseover="tip.start(this)" tips="<%=L_Tip_Info_06%>">&nbsp;</span></td>
 							</tr>
@@ -519,13 +519,13 @@ elseif sType="InfoEdit" then
 									<input name="Strade" type="hidden" id="Strade" value="<% = EasyCrm.getNewItem("Client","cID",""&cID&"","cStrade") %>">
 								</td>
 								<td class="td_l_r title"><%if Must_Client_cType = 1 then %><font color="#FF0000">*</font> <%end if%> <%=L_Client_cType%></td>
-								<td class="td_r_l"> <% = EasyCrm.getSelect("SelectData","Select_Type","Type",""&EasyCrm.getNewItem("Client","cID",""&cID&"","cType")&"") %> <% If mid(Session("CRM_qx"), 6, 1) = 1 Then %><input name="Back" type="button" id="Back" class="button227" value="ĞÂÔö" onclick='Select_Type_InfoAdd()' style="cursor:pointer"><script>function Select_Type_InfoAdd() {$.dialog.open('../System/GetUpdate.asp?action=SelectData&sType=Add&oType=Select_Type', {title: 'ĞÂ´°¿Ú', width: 400, height: 140,fixed: true}); };</script><%end if%></td>
+								<td class="td_r_l"> <% = EasyCrm.getSelect("SelectData","Select_Type","Type",""&EasyCrm.getNewItem("Client","cID",""&cID&"","cType")&"") %> <% If mid(Session("CRM_qx"), 6, 1) = 1 Then %><input name="Back" type="button" id="Back" class="button227" value="æ–°å¢" onclick='Select_Type_InfoAdd()' style="cursor:pointer"><script>function Select_Type_InfoAdd() {$.dialog.open('../System/GetUpdate.asp?action=SelectData&sType=Add&oType=Select_Type', {title: 'æ–°çª—å£', width: 400, height: 140,fixed: true}); };</script><%end if%></td>
 							</tr>
 							<tr> 
 								<td class="td_l_r title" <%if Hidden_Client_cStart=1 then%>style="display:none;"<%end if%> ><%if Must_Client_cStart = 1 then %><font color="#FF0000">*</font> <%end if%> <%=L_Client_cStart%></td>
-								<td class="td_r_l" <%if Hidden_Client_cStart=1 then%>style="display:none;"<%end if%> > <% = EasyCrm.getSelect("SelectData","Select_Star","Start",""&EasyCrm.getNewItem("Client","cID",""&cID&"","cStart")&"") %> <% If mid(Session("CRM_qx"), 6, 1) = 1 Then %><input name="Back" type="button" id="Back" class="button227" value="ĞÂÔö" onclick='Select_Star_InfoAdd()' style="cursor:pointer"><script>function Select_Star_InfoAdd() {$.dialog.open('../System/GetUpdate.asp?action=SelectData&sType=Add&oType=Select_Star', {title: 'ĞÂ´°¿Ú', width: 400, height: 140,fixed: true}); };</script><%end if%></td>
+								<td class="td_r_l" <%if Hidden_Client_cStart=1 then%>style="display:none;"<%end if%> > <% = EasyCrm.getSelect("SelectData","Select_Star","Start",""&EasyCrm.getNewItem("Client","cID",""&cID&"","cStart")&"") %> <% If mid(Session("CRM_qx"), 6, 1) = 1 Then %><input name="Back" type="button" id="Back" class="button227" value="æ–°å¢" onclick='Select_Star_InfoAdd()' style="cursor:pointer"><script>function Select_Star_InfoAdd() {$.dialog.open('../System/GetUpdate.asp?action=SelectData&sType=Add&oType=Select_Star', {title: 'æ–°çª—å£', width: 400, height: 140,fixed: true}); };</script><%end if%></td>
 								<td class="td_l_r title" <%if Hidden_Client_cSource=1 then%>style="display:none;"<%end if%> ><%if Must_Client_cSource = 1 then %><font color="#FF0000">*</font> <%end if%> <%=L_Client_cSource%></td>
-								<td class="td_r_l" <%if Hidden_Client_cSource=1 then%>style="display:none;"<%end if%> > <% = EasyCrm.getSelect("SelectData","Select_Source","Source",""&EasyCrm.getNewItem("Client","cID",""&cID&"","cSource")&"") %> <% If mid(Session("CRM_qx"), 6, 1) = 1 Then %><input name="Back" type="button" id="Back" class="button227" value="ĞÂÔö" onclick='Select_Source_InfoAdd()' style="cursor:pointer"><script>function Select_Source_InfoAdd() {$.dialog.open('../System/GetUpdate.asp?action=SelectData&sType=Add&oType=Select_Source', {title: 'ĞÂ´°¿Ú', width: 400, height: 140,fixed: true}); };</script><%end if%></td>
+								<td class="td_r_l" <%if Hidden_Client_cSource=1 then%>style="display:none;"<%end if%> > <% = EasyCrm.getSelect("SelectData","Select_Source","Source",""&EasyCrm.getNewItem("Client","cID",""&cID&"","cSource")&"") %> <% If mid(Session("CRM_qx"), 6, 1) = 1 Then %><input name="Back" type="button" id="Back" class="button227" value="æ–°å¢" onclick='Select_Source_InfoAdd()' style="cursor:pointer"><script>function Select_Source_InfoAdd() {$.dialog.open('../System/GetUpdate.asp?action=SelectData&sType=Add&oType=Select_Source', {title: 'æ–°çª—å£', width: 400, height: 140,fixed: true}); };</script><%end if%></td>
 							</tr>
 							<%
 								cContentStr = EasyCrm.getNewItem("CustomFieldContent","cID",""&cID&" and rID is null and oID is null and sID is null and hID is null and eID is null ","cContent")
@@ -565,9 +565,9 @@ elseif sType="InfoEdit" then
 											checkboxstr = split(""&rss("cContent")&"",",")
 											for checkboxarr = 0 to ubound(checkboxstr)
 											if checkboxstr(checkboxarr) = cContent(1) then
-											response.Write "<input name="""&rss("cName")&""" type=""checkbox"" value="""&checkboxstr(checkboxarr)&""" checked> "&checkboxstr(checkboxarr)&"¡¡"
+											response.Write "<input name="""&rss("cName")&""" type=""checkbox"" value="""&checkboxstr(checkboxarr)&""" checked> "&checkboxstr(checkboxarr)&"ã€€"
 											else
-											response.Write "<input name="""&rss("cName")&""" type=""checkbox"" value="""&checkboxstr(checkboxarr)&"""> "&checkboxstr(checkboxarr)&"¡¡"
+											response.Write "<input name="""&rss("cName")&""" type=""checkbox"" value="""&checkboxstr(checkboxarr)&"""> "&checkboxstr(checkboxarr)&"ã€€"
 											end if
 											next
 											%>
@@ -576,9 +576,9 @@ elseif sType="InfoEdit" then
 											radiostr = split(""&rss("cContent")&"",",")
 											for radioarr = 0 to ubound(radiostr)
 											if radiostr(radioarr) = cContent(1) then
-											response.Write "<input name="""&rss("cName")&""" type=""radio"" value="""&radiostr(radioarr)&""" checked> "&radiostr(radioarr)&"¡¡"
+											response.Write "<input name="""&rss("cName")&""" type=""radio"" value="""&radiostr(radioarr)&""" checked> "&radiostr(radioarr)&"ã€€"
 											else
-											response.Write "<input name="""&rss("cName")&""" type=""radio"" value="""&radiostr(radioarr)&"""> "&radiostr(radioarr)&"¡¡"
+											response.Write "<input name="""&rss("cName")&""" type=""radio"" value="""&radiostr(radioarr)&"""> "&radiostr(radioarr)&"ã€€"
 											end if
 											next
 											%>
@@ -608,14 +608,14 @@ elseif sType="InfoEdit" then
 											<%
 											checkboxstr = split(""&rss("cContent")&"",",")
 											for checkboxarr = 0 to ubound(checkboxstr)
-											response.Write "<input name="""&rss("cName")&""" type=""checkbox"" value="""&checkboxstr(checkboxarr)&"""> "&checkboxstr(checkboxarr)&"¡¡"
+											response.Write "<input name="""&rss("cName")&""" type=""checkbox"" value="""&checkboxstr(checkboxarr)&"""> "&checkboxstr(checkboxarr)&"ã€€"
 											next
 											%>
 										<%elseif rss("cType") = "radio" then%>
 											<%
 											radiostr = split(""&rss("cContent")&"",",")
 											for radioarr = 0 to ubound(radiostr)
-											response.Write "<input name="""&rss("cName")&""" type=""radio"" value="""&radiostr(radioarr)&"""> "&radiostr(radioarr)&"¡¡"
+											response.Write "<input name="""&rss("cName")&""" type=""radio"" value="""&radiostr(radioarr)&"""> "&radiostr(radioarr)&"ã€€"
 											next
 											%>
 										<%end if%>
@@ -647,8 +647,8 @@ elseif sType="InfoEdit" then
 	<tr>
 		<td valign="top" class="td_n Bottom_pd "> 
 			<input name="cId" type="hidden" id="cId" value="<% = cId %>">
-			<input type="submit" name="Submit" class="button45" value="±£´æ" >¡¡
-			<input name="Back" type="button" id="Back" class="button43" value="¹Ø±Õ" onClick="art.dialog.close();">
+			<input type="submit" name="Submit" class="button45" value="ä¿å­˜" >ã€€
+			<input name="Back" type="button" id="Back" class="button43" value="å…³é—­" onClick="art.dialog.close();">
 		</td>
 	</tr>
 </table>
@@ -770,17 +770,17 @@ elseif sType="SaveEdit" then
 	rs.Close
 	Set rs = Nothing
 	
-	'Í¬²½¸üĞÂÁªÏµÈË±íµÚÒ»Ìõ¼ÇÂ¼
+	'åŒæ­¥æ›´æ–°è”ç³»äººè¡¨ç¬¬ä¸€æ¡è®°å½•
 	conn.execute ("UPDATE [Linkmans] SET lName='"&cLinkman&"',lZhiwei='"&cZhiwei&"',lMobile='"&cMobile&"' Where cId ="&cId&" and lid in ( select top 1 lid from [Linkmans] where cid="&cId&" ) ")
 	
-	'¸üĞÂ×Ô¶¨ÒåÄÚÈİ
+	'æ›´æ–°è‡ªå®šä¹‰å†…å®¹
 	
 	cContent = ""
 	Set rsc = Server.CreateObject("ADODB.Recordset")
 	rsc.Open "Select * From [CustomField] where cTable='Client' order by Id asc ",conn,3,1
 	If rsc.RecordCount > 0 Then
 	Do While Not rsc.BOF And Not rsc.EOF
-	'»ñÈ¡ËùÓĞ×Ô¶¨Òå×Ö¶Î
+	'è·å–æ‰€æœ‰è‡ªå®šä¹‰å­—æ®µ
 	cContent = cContent & rsc("cName") &":"& Trim(Request(rsc("cName"))) &"|" 
 	rsc.MoveNext
 	Loop
@@ -793,7 +793,7 @@ elseif sType="SaveEdit" then
 	conn.execute ("UPDATE [CustomFieldContent] SET cContent='"&cContent&"' Where cId ="&cId&" ")
 	end if
 	
-	'²åÈë²Ù×÷¼ÇÂ¼
+	'æ’å…¥æ“ä½œè®°å½•
 	conn.execute ("insert into Logfile(lCid,lClass,lAction,lUser,lTime) values('"&cid&"','"&L_Client&"','"&L_insert_action_02&"','"&Session("CRM_name")&"','"&now()&"')")	
 
 	Response.Write("<script>art.dialog.close();art.dialog.open.origin.location.reload();</script>")
@@ -806,31 +806,31 @@ elseif sType="InfoView" then
 	<tr>
 		<td class="top_left td_t_n td_r_n"><%=L_Client_cCompany%> : <%=EasyCrm.getNewItem("Client","cID",""&cID&"","cCompany")%> </td>
 		<td class="top_right td_t_n td_r_n">
-			<input type="button" class="button_top_reload" value=" " title="Ë¢ĞÂ" onClick=window.location.href="javascript:window.location.reload();" />
+			<input type="button" class="button_top_reload" value=" " title="åˆ·æ–°" onClick=window.location.href="javascript:window.location.reload();" />
 			<% If mid(Session("CRM_qx"), 5, 1) = 1 Then %>
 			<%if otype="Linkmans" then%>
-			<input type="button" class="button_top_set" value=" " title="ÉèÖÃ" onclick='Setting_Linkmans()' style="cursor:pointer" />
+			<input type="button" class="button_top_set" value=" " title="è®¾ç½®" onclick='Setting_Linkmans()' style="cursor:pointer" />
 			<%elseif otype="Records" then%>
-			<input type="button" class="button_top_set" value=" " title="ÉèÖÃ" onclick='Setting_Records()' style="cursor:pointer" />
+			<input type="button" class="button_top_set" value=" " title="è®¾ç½®" onclick='Setting_Records()' style="cursor:pointer" />
 			<%elseif otype="Order" then%>
-			<input type="button" class="button_top_set" value=" " title="ÉèÖÃ" onclick='Setting_Order()' style="cursor:pointer" />
+			<input type="button" class="button_top_set" value=" " title="è®¾ç½®" onclick='Setting_Order()' style="cursor:pointer" />
 			<%elseif otype="Hetong" then%>
-			<input type="button" class="button_top_set" value=" " title="ÉèÖÃ" onclick='Setting_Hetong()' style="cursor:pointer" />
+			<input type="button" class="button_top_set" value=" " title="è®¾ç½®" onclick='Setting_Hetong()' style="cursor:pointer" />
 			<%elseif otype="Service" then%>
-			<input type="button" class="button_top_set" value=" " title="ÉèÖÃ" onclick='Setting_Service()' style="cursor:pointer" />
+			<input type="button" class="button_top_set" value=" " title="è®¾ç½®" onclick='Setting_Service()' style="cursor:pointer" />
 			<%elseif otype="Expense" then%>
-			<input type="button" class="button_top_set" value=" " title="ÉèÖÃ" onclick='Setting_Expense()' style="cursor:pointer" />
+			<input type="button" class="button_top_set" value=" " title="è®¾ç½®" onclick='Setting_Expense()' style="cursor:pointer" />
 			<%end if%>
 			<%end if%>
         </td>
 	</tr>
 </table>
-<script>function Setting_Linkmans() {$.dialog.open('../system/GetUpdate.asp?action=Setting&sType=Linkmans', {title: '×Ô¶¨ÒåÉèÖÃ', width: 900, height: 480,fixed: true}); };</script>
-<script>function Setting_Records() {$.dialog.open('../system/GetUpdate.asp?action=Setting&sType=Records', {title: '×Ô¶¨ÒåÉèÖÃ', width: 900, height: 480,fixed: true}); };</script>
-<script>function Setting_Order() {$.dialog.open('../system/GetUpdate.asp?action=Setting&sType=Order', {title: '×Ô¶¨ÒåÉèÖÃ', width: 900, height: 480,fixed: true}); };</script>
-<script>function Setting_Hetong() {$.dialog.open('../system/GetUpdate.asp?action=Setting&sType=Hetong', {title: '×Ô¶¨ÒåÉèÖÃ', width: 900, height: 480,fixed: true}); };</script>
-<script>function Setting_Service() {$.dialog.open('../system/GetUpdate.asp?action=Setting&sType=Service', {title: '×Ô¶¨ÒåÉèÖÃ', width: 900, height: 480,fixed: true}); };</script>
-<script>function Setting_Expense() {$.dialog.open('../system/GetUpdate.asp?action=Setting&sType=Expense', {title: '×Ô¶¨ÒåÉèÖÃ', width: 900, height: 480,fixed: true}); };</script>
+<script>function Setting_Linkmans() {$.dialog.open('../system/GetUpdate.asp?action=Setting&sType=Linkmans', {title: 'è‡ªå®šä¹‰è®¾ç½®', width: 900, height: 480,fixed: true}); };</script>
+<script>function Setting_Records() {$.dialog.open('../system/GetUpdate.asp?action=Setting&sType=Records', {title: 'è‡ªå®šä¹‰è®¾ç½®', width: 900, height: 480,fixed: true}); };</script>
+<script>function Setting_Order() {$.dialog.open('../system/GetUpdate.asp?action=Setting&sType=Order', {title: 'è‡ªå®šä¹‰è®¾ç½®', width: 900, height: 480,fixed: true}); };</script>
+<script>function Setting_Hetong() {$.dialog.open('../system/GetUpdate.asp?action=Setting&sType=Hetong', {title: 'è‡ªå®šä¹‰è®¾ç½®', width: 900, height: 480,fixed: true}); };</script>
+<script>function Setting_Service() {$.dialog.open('../system/GetUpdate.asp?action=Setting&sType=Service', {title: 'è‡ªå®šä¹‰è®¾ç½®', width: 900, height: 480,fixed: true}); };</script>
+<script>function Setting_Expense() {$.dialog.open('../system/GetUpdate.asp?action=Setting&sType=Expense', {title: 'è‡ªå®šä¹‰è®¾ç½®', width: 900, height: 480,fixed: true}); };</script>
 
 <table width="100%" border="0" cellpadding="0" cellspacing="0">
 	<tr>
@@ -897,8 +897,8 @@ elseif sType="InfoView" then
 						<table width="100%" border="0" cellspacing="0" cellpadding="0" CLASS="table_1">
 						<col width="120" /><col width="300" /><col width="120" />
 							<tr class="tr_t"> 
-								<td class="td_l_l" COLSPAN="2" style="border-right:0;"><B>»ù±¾×ÊÁÏ</B></td>
-								<td class="td_l_r" COLSPAN="2"><%=L_Client_cLastUpdated%>£º<%=EasyCrm.FormatDate(EasyCrm.getNewItem("Client","cID",""&cID&"","cLastUpdated"),1)%></td>
+								<td class="td_l_l" COLSPAN="2" style="border-right:0;"><B>åŸºæœ¬èµ„æ–™</B></td>
+								<td class="td_l_r" COLSPAN="2"><%=L_Client_cLastUpdated%>ï¼š<%=EasyCrm.FormatDate(EasyCrm.getNewItem("Client","cID",""&cID&"","cLastUpdated"),1)%></td>
 							</tr>
 							<tr> 
 								<td class="td_l_r title"><%=L_Client_cAddress%></td>
@@ -987,18 +987,18 @@ elseif sType="InfoView" then
 		<td valign="top" class="td_n Bottom_pd "> 
 			<% If mid(Session("CRM_qx"), 18, 1) = 1 Then %>
 			<%if YNRange = "" then%>
-			<input type="button" class="button45" value="±à¼­" onclick='Client_InfoEdit();' style="cursor:pointer" />¡¡
+			<input type="button" class="button45" value="ç¼–è¾‘" onclick='Client_InfoEdit();' style="cursor:pointer" />ã€€
 			<%end if%>
 			<%end if%>
-			<input name="Back" type="button" id="Back" class="button43" value="¹Ø±Õ" onClick="art.dialog.close();">
+			<input name="Back" type="button" id="Back" class="button43" value="å…³é—­" onClick="art.dialog.close();">
 		</td>
 	</tr>
 </table>
 </div>
-<script>function Client_InfoEdit() {$.dialog.open('../Main/GetUpdate.asp?action=Client&sType=InfoEdit&cId=<%=cID%>', {title: '±à¼­', width: 900,height: 480, fixed: true}); };</script>
+<script>function Client_InfoEdit() {$.dialog.open('../Main/GetUpdate.asp?action=Client&sType=InfoEdit&cId=<%=cID%>', {title: 'ç¼–è¾‘', width: 900,height: 480, fixed: true}); };</script>
 
 	<%
-	elseif otype="Linkmans" then 'ÁªÏµÈË ?action=Client&sType=InfoView&otype=Linkmans&cID=cID
+	elseif otype="Linkmans" then 'è”ç³»äºº ?action=Client&sType=InfoView&otype=Linkmans&cID=cID
 	%>
 			<table width="100%" border="0" cellpadding="0" cellspacing="0"> 
 				<tr>
@@ -1043,7 +1043,7 @@ elseif sType="InfoView" then
 								<td class="td_l_c"><%=L_Linkmans_lTime%></td>
 								<%end if%>
 								<%if YNRange = "" then%>
-								<td width="90" class="td_l_c">¹ÜÀí</td>
+								<td width="90" class="td_l_c">ç®¡ç†</td>
 								<%end if%>
 							</tr>
 						<%
@@ -1086,7 +1086,7 @@ elseif sType="InfoView" then
 								<td class="td_l_c"><%=EasyCrm.FormatDate(rs("lBirthday"),2)%></td>
 								<%end if%>
 								<%if Linkmans_lContent = 1 then %>
-								<td class="td_l_c"><%if rs("lContent")<>"" then%><input type="button" class="button226" value="²é¿´" onclick='Linkmans_InfoView<%=rs("lId")%>()' style="cursor:pointer" /><%end if%></td>
+								<td class="td_l_c"><%if rs("lContent")<>"" then%><input type="button" class="button226" value="æŸ¥çœ‹" onclick='Linkmans_InfoView<%=rs("lId")%>()' style="cursor:pointer" /><%end if%></td>
 								<%end if%>
 								<%if Linkmans_lTime = 1 then %>
 								<td class="td_l_c"><%=EasyCrm.FormatDate(rs("lTime"),2)%></td>
@@ -1095,9 +1095,9 @@ elseif sType="InfoView" then
 								<td class="td_l_c"><% If mid(Session("CRM_qx"), 23, 1) = 1 Then %><input type="button" class="button_info_edit" value=" " title="<%=L_Edit%>"  onclick='Linkmans_InfoEdit<%=rs("lId")%>()' style="cursor:pointer" /><%end if%> <% If mid(Session("CRM_qx"), 24, 1) = 1 Then %><%if i>1 then%><input type="button" class="button_info_del" value=" " title="<%=L_Del%>" onclick='Linkmans_InfoDel<%=rs("lId")%>()' style="cursor:pointer" /><%end if%><%end if%></td>
 								<%end if%>
 							</tr>
-							<script>function Linkmans_InfoEdit<%=rs("lId")%>() {$.dialog.open('../Main/GetUpdateRW.asp?action=Linkmans&sType=Edit&Id=<%=rs("lId")%><%if i=1 then%>&YNUpdate=1<%end if%>', {title: '±à¼­', width: 700,height: 340, fixed: true}); };</script>
+							<script>function Linkmans_InfoEdit<%=rs("lId")%>() {$.dialog.open('../Main/GetUpdateRW.asp?action=Linkmans&sType=Edit&Id=<%=rs("lId")%><%if i=1 then%>&YNUpdate=1<%end if%>', {title: 'ç¼–è¾‘', width: 700,height: 340, fixed: true}); };</script>
 							<script>function Linkmans_InfoDel<%=rs("lId")%>() {$.dialog( { content: '<%=Alert_del_YN%>',icon: 'error',ok: function () { art.dialog.open('../Main/GetUpdateRW.asp?action=Linkmans&sType=Delete&Id=<%=rs("lid")%>');return false;},cancel: true }); };</script>
-							<script>function Linkmans_InfoView<%=rs("lId")%>() {art.dialog({ title: 'ÏêÇé±¸×¢',content: '<%=rs("lContent")%>',drag: false,resize: false}); };</script>
+							<script>function Linkmans_InfoView<%=rs("lId")%>() {art.dialog({ title: 'è¯¦æƒ…å¤‡æ³¨',content: '<%=rs("lContent")%>',drag: false,resize: false}); };</script>
 						<%
 						rs.MoveNext
 						Loop
@@ -1114,20 +1114,20 @@ elseif sType="InfoView" then
 <table width="100%" border="0" cellpadding="0" cellspacing="0">
 	<tr>
 		<td valign="top" class="td_n Bottom_pd "> 
-			<span class="Bottom_pd r fontnobold">ºìÉ«£ºµÚÒ»ÁªÏµÈË£¨½öÔÊĞíĞŞ¸Ä£¬Í¬²½¸üĞÂ»ù±¾µµ°¸£©</span>
+			<span class="Bottom_pd r fontnobold">çº¢è‰²ï¼šç¬¬ä¸€è”ç³»äººï¼ˆä»…å…è®¸ä¿®æ”¹ï¼ŒåŒæ­¥æ›´æ–°åŸºæœ¬æ¡£æ¡ˆï¼‰</span>
 			<% If mid(Session("CRM_qx"), 22, 1) = 1 Then %>
 			<%if YNRange = "" then%>
-			<input name="Back" type="button" id="Back" class="button45" value="ĞÂÔö" onclick='Linkmans_InfoAdd()' style="cursor:pointer">¡¡
+			<input name="Back" type="button" id="Back" class="button45" value="æ–°å¢" onclick='Linkmans_InfoAdd()' style="cursor:pointer">ã€€
 			<%end if%>
 			<%end if%>
-			<input name="Back" type="button" id="Back" class="button43" value="¹Ø±Õ" onClick="art.dialog.close();">
+			<input name="Back" type="button" id="Back" class="button43" value="å…³é—­" onClick="art.dialog.close();">
 		</td>
 	</tr>
 </table>
 </div>
-<script>function Linkmans_InfoAdd() {$.dialog.open('../Main/GetUpdateRW.asp?action=Linkmans&sType=Add&cID=<%=cID%>', {title: 'ĞÂ´°¿Ú', width: 700, height: 340,fixed: true}); };</script>
+<script>function Linkmans_InfoAdd() {$.dialog.open('../Main/GetUpdateRW.asp?action=Linkmans&sType=Add&cID=<%=cID%>', {title: 'æ–°çª—å£', width: 700, height: 340,fixed: true}); };</script>
 	<%
-	elseif otype="Records" then '¸úµ¥¼ÇÂ¼ ?action=Client&sType=InfoView&otype=Records&cID=cID
+	elseif otype="Records" then 'è·Ÿå•è®°å½• ?action=Client&sType=InfoView&otype=Records&cID=cID
 	%>
 			<table width="100%" border="0" cellpadding="0" cellspacing="0"> 
 				<tr>
@@ -1157,7 +1157,7 @@ elseif sType="InfoView" then
 								<td class="td_l_c"><%=L_Records_rTime%></td>
 								<%end if%>
 								<%if YNRange = "" then%>
-								<td width="90" class="td_l_c">¹ÜÀí</td>
+								<td width="90" class="td_l_c">ç®¡ç†</td>
 								<%end if%>
 							</tr>
 						<%
@@ -1192,7 +1192,7 @@ elseif sType="InfoView" then
 								<td class="td_l_c"><% If mid(Session("CRM_qx"), 28, 1) = 1 Then %><input type="button" class="button_info_edit" value=" " title="<%=L_Edit%>"  onclick='Records_InfoEdit<%=rs("rId")%>()' style="cursor:pointer" /><%end if%> <% If mid(Session("CRM_qx"), 29, 1) = 1 Then %><input type="button" class="button_info_del" value=" " title="<%=L_Del%>" onclick='Records_InfoDel<%=rs("rId")%>()' style="cursor:pointer" /><%end if%></td>
 								<%end if%>
 							</tr>
-							<script>function Records_InfoEdit<%=rs("rId")%>() {$.dialog.open('../Main/GetUpdateRW.asp?action=Records&sType=Edit&Id=<%=rs("rId")%>', {title: '±à¼­', width: 800,height: 340, fixed: true}); };</script>
+							<script>function Records_InfoEdit<%=rs("rId")%>() {$.dialog.open('../Main/GetUpdateRW.asp?action=Records&sType=Edit&Id=<%=rs("rId")%>', {title: 'ç¼–è¾‘', width: 800,height: 340, fixed: true}); };</script>
 							<script>function Records_InfoDel<%=rs("rId")%>() {$.dialog( { content: '<%=Alert_del_YN%>',icon: 'error',ok: function () { art.dialog.open('../Main/GetUpdateRW.asp?action=Records&sType=Delete&Id=<%=rs("rId")%>');return false;},cancel: true }); };</script>
 						<%
 						rs.MoveNext
@@ -1212,18 +1212,18 @@ elseif sType="InfoView" then
 		<td valign="top" class="td_n Bottom_pd "> 
 			<% If mid(Session("CRM_qx"), 27, 1) = 1 Then %>
 			<%if YNRange = "" then%>
-			<input name="Back" type="button" id="Back" class="button45" value="ĞÂÔö" onclick='Records_InfoAdd()' style="cursor:pointer">¡¡
+			<input name="Back" type="button" id="Back" class="button45" value="æ–°å¢" onclick='Records_InfoAdd()' style="cursor:pointer">ã€€
 			<%end if%>
 			<%end if%>
-			<input name="Back" type="button" id="Back" class="button43" value="¹Ø±Õ" onClick="art.dialog.close();">
+			<input name="Back" type="button" id="Back" class="button43" value="å…³é—­" onClick="art.dialog.close();">
 			
 		</td>
 	</tr>
 </table>
 </div>
-<script>function Records_InfoAdd() {$.dialog.open('../Main/GetUpdateRW.asp?action=Records&sType=Add&cID=<%=cID%>', {title: 'ĞÂ´°¿Ú', width: 800, height: 340,fixed: true}); };</script>
+<script>function Records_InfoAdd() {$.dialog.open('../Main/GetUpdateRW.asp?action=Records&sType=Add&cID=<%=cID%>', {title: 'æ–°çª—å£', width: 800, height: 340,fixed: true}); };</script>
 	<%
-	elseif otype="Order" then '¶©µ¥¼ÇÂ¼ ?action=Client&sType=InfoView&otype=Order&cID=cID
+	elseif otype="Order" then 'è®¢å•è®°å½• ?action=Client&sType=InfoView&otype=Order&cID=cID
 	%>
 			<table width="100%" border="0" cellpadding="0" cellspacing="0"> 
 				<tr>
@@ -1257,7 +1257,7 @@ elseif sType="InfoView" then
 								<%if Order_oTime = 1 then %>
 								<td class="td_l_c"><%=L_Order_oTime%></td>
 								<%end if%>
-								<td width="130" class="td_l_c">¹ÜÀí</td>
+								<td width="130" class="td_l_c">ç®¡ç†</td>
 							</tr>
 						<%
 						Set rs = Server.CreateObject("ADODB.Recordset")
@@ -1266,7 +1266,7 @@ elseif sType="InfoView" then
 						Do While Not rs.BOF And Not rs.EOF
 						%>
 							<tr class="tr">
-								<td class="td_l_c"><a title="¶©µ¥²úÆ·Ã÷Ï¸"  onclick='Order_Products_List<%=rs("oId")%>()' style="cursor:pointer" ><%=rs("oCode")%></a></td>
+								<td class="td_l_c"><a title="è®¢å•äº§å“æ˜ç»†"  onclick='Order_Products_List<%=rs("oId")%>()' style="cursor:pointer" ><%=rs("oCode")%></a></td>
 								<%if Order_oLinkman = 1 then %>
 								<td class="td_l_c"><%=rs("oLinkman")%></td>
 								<%end if%>
@@ -1281,10 +1281,10 @@ elseif sType="InfoView" then
 								<%end if%>
 								<td class="td_l_c"><%if rs("oMoney")<1 and rs("oMoney")>0 then%>0<%end if%><%=rs("oMoney")%></td>
 								<%if Order_oState = 1 then %>
-								<td class="td_l_c"><%if rs("oState") = 0 then%>Î´´¦Àí<%elseif rs("oState") = 1 then%>´¦ÀíÖĞ<%elseif rs("oState") = 2 then%>ÒÑÍê³É<%elseif rs("oState") = 3 then%>ÒÑÈ¡Ïû<%end if%></td>
+								<td class="td_l_c"><%if rs("oState") = 0 then%>æœªå¤„ç†<%elseif rs("oState") = 1 then%>å¤„ç†ä¸­<%elseif rs("oState") = 2 then%>å·²å®Œæˆ<%elseif rs("oState") = 3 then%>å·²å–æ¶ˆ<%end if%></td>
 								<%end if%>
 								<%if Order_oContent = 1 then %>
-								<td class="td_l_c"><%if rs("oContent")<>"" then%><input type="button" class="button226" value="²é¿´" onclick='Order_InfoView<%=rs("oId")%>()' style="cursor:pointer" /><%end if%></td>
+								<td class="td_l_c"><%if rs("oContent")<>"" then%><input type="button" class="button226" value="æŸ¥çœ‹" onclick='Order_InfoView<%=rs("oId")%>()' style="cursor:pointer" /><%end if%></td>
 								<%end if%>
 								<%if Order_oUser = 1 then %>
 								<td class="td_l_c"><%=rs("oUser")%></td>
@@ -1292,17 +1292,17 @@ elseif sType="InfoView" then
 								<%if Order_oTime = 1 then %>
 								<td class="td_l_c"><%=EasyCrm.FormatDate(rs("oTime"),2)%></td>
 								<%end if%>
-								<td class="td_l_c"><input type="button" class="button_info_add" value=" " title="¿ìËÙÌí¼Ó²úÆ·"  onclick='Order_Products_Add<%=rs("oId")%>()' style="cursor:pointer" /> <% If mid(Session("CRM_qx"), 33, 1) = 1 Then %><input type="button" class="button_info_edit" value=" " title="<%=L_Edit%>"  onclick='Order_InfoEdit<%=rs("oId")%>()' style="cursor:pointer" /><%end if%> <% If mid(Session("CRM_qx"), 34, 1) = 1 Then %><input type="button" class="button_info_del" value=" " title="<%=L_Del%>" onclick='Order_InfoDel<%=rs("oId")%>()' style="cursor:pointer" /><%end if%></td>
+								<td class="td_l_c"><input type="button" class="button_info_add" value=" " title="å¿«é€Ÿæ·»åŠ äº§å“"  onclick='Order_Products_Add<%=rs("oId")%>()' style="cursor:pointer" /> <% If mid(Session("CRM_qx"), 33, 1) = 1 Then %><input type="button" class="button_info_edit" value=" " title="<%=L_Edit%>"  onclick='Order_InfoEdit<%=rs("oId")%>()' style="cursor:pointer" /><%end if%> <% If mid(Session("CRM_qx"), 34, 1) = 1 Then %><input type="button" class="button_info_del" value=" " title="<%=L_Del%>" onclick='Order_InfoDel<%=rs("oId")%>()' style="cursor:pointer" /><%end if%></td>
 							</tr>
-							<script>function Order_Products_Add<%=rs("oId")%>() {$.dialog.open('../Main/GetUpdateRW.asp?action=OrderProducts&sType=Add&Id=<%=rs("oId")%>', {title: 'Ìí¼Ó', width: 700,height: 400, fixed: true}); };</script>
-							<script>function Order_Products_List<%=rs("oId")%>() {$.dialog.open('../Main/GetUpdateRW.asp?action=OrderProducts&sType=List&Id=<%=rs("oId")%>', {title: '²é¿´', width: 860,height: 440, fixed: true}); };</script>
-							<script>function Order_InfoEdit<%=rs("oId")%>() {$.dialog.open('../Main/GetUpdateRW.asp?action=Order&sType=Edit&Id=<%=rs("oId")%>', {title: '±à¼­', width: 700,height: 340, fixed: true}); };</script>
+							<script>function Order_Products_Add<%=rs("oId")%>() {$.dialog.open('../Main/GetUpdateRW.asp?action=OrderProducts&sType=Add&Id=<%=rs("oId")%>', {title: 'æ·»åŠ ', width: 700,height: 400, fixed: true}); };</script>
+							<script>function Order_Products_List<%=rs("oId")%>() {$.dialog.open('../Main/GetUpdateRW.asp?action=OrderProducts&sType=List&Id=<%=rs("oId")%>', {title: 'æŸ¥çœ‹', width: 860,height: 440, fixed: true}); };</script>
+							<script>function Order_InfoEdit<%=rs("oId")%>() {$.dialog.open('../Main/GetUpdateRW.asp?action=Order&sType=Edit&Id=<%=rs("oId")%>', {title: 'ç¼–è¾‘', width: 700,height: 340, fixed: true}); };</script>
 							<script>function Order_InfoDel<%=rs("oId")%>() {$.dialog( { content: '<%=Alert_del_YN%>',icon: 'error',ok: function () { art.dialog.open('../Main/GetUpdateRW.asp?action=Order&sType=Delete&Id=<%=rs("oId")%>');return false;},cancel: true }); };</script>
 							
 							<script>function Order_InfoView<%=rs("oId")%>() {
 								art.dialog(
 									{ 
-										title: 'ÏêÇé±¸×¢', 
+										title: 'è¯¦æƒ…å¤‡æ³¨', 
 										content: '<%=EasyCrm.clearWord(""&rs("oContent")&"")%>',
 										drag: false,
 										resize: false
@@ -1326,16 +1326,16 @@ elseif sType="InfoView" then
 	<tr>
 		<td valign="top" class="td_n Bottom_pd "> 
 			<% If mid(Session("CRM_qx"), 32, 1) = 1 Then %>
-			<input name="Back" type="button" id="Back" class="button45" value="ĞÂÔö" onclick='Order_InfoAdd()' style="cursor:pointer">¡¡
+			<input name="Back" type="button" id="Back" class="button45" value="æ–°å¢" onclick='Order_InfoAdd()' style="cursor:pointer">ã€€
 			<%end if%>
-			<input name="Back" type="button" id="Back" class="button43" value="¹Ø±Õ" onClick="art.dialog.close();">
+			<input name="Back" type="button" id="Back" class="button43" value="å…³é—­" onClick="art.dialog.close();">
 		</td>
 	</tr>
 </table>
 </div>
-<script>function Order_InfoAdd() {$.dialog.open('../Main/GetUpdateRW.asp?action=Order&sType=Add&cID=<%=cID%>', {title: 'ĞÂ´°¿Ú', width: 700, height: 340,fixed: true}); };</script>
+<script>function Order_InfoAdd() {$.dialog.open('../Main/GetUpdateRW.asp?action=Order&sType=Add&cID=<%=cID%>', {title: 'æ–°çª—å£', width: 700, height: 340,fixed: true}); };</script>
 	<%
-	elseif otype="Hetong" then 'ºÏÍ¬¼ÇÂ¼ ?action=Client&sType=InfoView&otype=Hetong&cID=cID
+	elseif otype="Hetong" then 'åˆåŒè®°å½• ?action=Client&sType=InfoView&otype=Hetong&cID=cID
 	%>
 			<table width="100%" border="0" cellpadding="0" cellspacing="0"> 
 				<tr>
@@ -1392,7 +1392,7 @@ elseif sType="InfoView" then
 								<%if Hetong_hTime = 1 then %>
 								<td class="td_l_c"><%=L_Hetong_hTime%></td>
 								<%end if%>
-								<td width="130" class="td_l_c">¹ÜÀí</td>
+								<td width="130" class="td_l_c">ç®¡ç†</td>
 							</tr>
 						<%
 						Set rs = Server.CreateObject("ADODB.Recordset")
@@ -1402,10 +1402,10 @@ elseif sType="InfoView" then
 						%>
 							<tr class="tr">
 								<%if Hetong_hNum = 1 then %>
-								<td class="td_l_c"><a title="Ğø·Ñ¼ÇÂ¼"  onclick='Hetong_Renew_List<%=rs("hId")%>()' style="cursor:pointer" ><%=rs("hNum")%></td>
+								<td class="td_l_c"><a title="ç»­è´¹è®°å½•"  onclick='Hetong_Renew_List<%=rs("hId")%>()' style="cursor:pointer" ><%=rs("hNum")%></td>
 								<%end if%>
 								<%if Hetong_oId = 1 then %>
-								<td class="td_l_c"><%if rs("oId")<>"" then%><a title="¶©µ¥²úÆ·Ã÷Ï¸"  onclick='Order_Products_List<%=rs("oId")%>()' style="cursor:pointer" ><%=EasyCrm.getNewItem("Order","oid",rs("oId"),"oCode")%></a><%end if%></td>
+								<td class="td_l_c"><%if rs("oId")<>"" then%><a title="è®¢å•äº§å“æ˜ç»†"  onclick='Order_Products_List<%=rs("oId")%>()' style="cursor:pointer" ><%=EasyCrm.getNewItem("Order","oid",rs("oId"),"oCode")%></a><%end if%></td>
 								<%end if%>
 								<%if Hetong_hSdate = 1 then %>
 								<td class="td_l_c"><%=EasyCrm.FormatDate(rs("hSdate"),2)%></td>
@@ -1433,7 +1433,7 @@ elseif sType="InfoView" then
 								<%end if%>
 								<td class="td_l_c"><%=rs("hState")%></td>
 								<%if Hetong_hContent = 1 then %>
-								<td class="td_l_c"><%if rs("hContent")<>"" then%><input type="button" class="button226" value="²é¿´" onclick='Hetong_InfoView<%=rs("hId")%>()' style="cursor:pointer" /><%end if%></td>
+								<td class="td_l_c"><%if rs("hContent")<>"" then%><input type="button" class="button226" value="æŸ¥çœ‹" onclick='Hetong_InfoView<%=rs("hId")%>()' style="cursor:pointer" /><%end if%></td>
 								<%end if%>
 								<%if Hetong_hAudit = 1 then %>
 								<td class="td_l_c"><%=rs("hAudit")%></td>
@@ -1442,7 +1442,7 @@ elseif sType="InfoView" then
 								<td class="td_l_c"><%=EasyCrm.FormatDate(rs("hAuditTime"),2)%></td>
 								<%end if%>
 								<%if Hetong_hAuditReasons = 1 then %>
-								<td class="td_l_c"><%if rs("hAuditReasons")<>"" then%><input type="button" class="button226" value="²é¿´" onclick='Hetong_AuditReasons<%=rs("hId")%>()' style="cursor:pointer" /><%end if%></td>
+								<td class="td_l_c"><%if rs("hAuditReasons")<>"" then%><input type="button" class="button226" value="æŸ¥çœ‹" onclick='Hetong_AuditReasons<%=rs("hId")%>()' style="cursor:pointer" /><%end if%></td>
 								<%end if%>
 								<%if Hetong_hUser = 1 then %>
 								<td class="td_l_c"><%=rs("hUser")%></td>
@@ -1451,15 +1451,15 @@ elseif sType="InfoView" then
 								<td class="td_l_c"><%=EasyCrm.FormatDate(rs("hTime"),2)%></td>
 								<%end if%>
 								
-								<td class="td_l_c"><input type="button" class="button_info_add" value=" " title="¿ìËÙĞø·Ñ"  onclick='Hetong_Renew_InfoAdd<%=rs("hId")%>()' style="cursor:pointer" /> <% If mid(Session("CRM_qx"), 38, 1) = 1 Then %><input type="button" class="button_info_edit" value=" " title="<%=L_Edit%>"  onclick='Hetong_InfoEdit<%=rs("hId")%>()' style="cursor:pointer" /><%end if%> <% If mid(Session("CRM_qx"), 39, 1) = 1 Then %><input type="button" class="button_info_del" value=" " title="<%=L_Del%>" onclick='Hetong_InfoDel<%=rs("hId")%>()' style="cursor:pointer" /><%end if%></td>
+								<td class="td_l_c"><input type="button" class="button_info_add" value=" " title="å¿«é€Ÿç»­è´¹"  onclick='Hetong_Renew_InfoAdd<%=rs("hId")%>()' style="cursor:pointer" /> <% If mid(Session("CRM_qx"), 38, 1) = 1 Then %><input type="button" class="button_info_edit" value=" " title="<%=L_Edit%>"  onclick='Hetong_InfoEdit<%=rs("hId")%>()' style="cursor:pointer" /><%end if%> <% If mid(Session("CRM_qx"), 39, 1) = 1 Then %><input type="button" class="button_info_del" value=" " title="<%=L_Del%>" onclick='Hetong_InfoDel<%=rs("hId")%>()' style="cursor:pointer" /><%end if%></td>
 							</tr>
-							<script>function Hetong_Renew_List<%=rs("hId")%>() {$.dialog.open('../Main/GetUpdateRW.asp?action=Hetong&sType=RenewList&Id=<%=rs("hId")%>', {title: '²é¿´', width: 860,height: 440, fixed: true}); };</script>
-							<script>function Order_Products_List<%=rs("oId")%>() {$.dialog.open('../Main/GetUpdateRW.asp?action=OrderProducts&sType=List&Id=<%=rs("oId")%>', {title: '²é¿´', width: 860,height: 440, fixed: true}); };</script>
-							<script>function Hetong_Renew_InfoAdd<%=rs("hId")%>() {$.dialog.open('../Main/GetUpdateRW.asp?action=Hetong&sType=AddRenew&Id=<%=rs("hId")%>', {title: 'Ğø·Ñ', width: 600,height: 340, fixed: true}); };</script>
-							<script>function Hetong_InfoEdit<%=rs("hId")%>() {$.dialog.open('../Main/GetUpdateRW.asp?action=Hetong&sType=Edit&Id=<%=rs("hId")%>', {title: '±à¼­', width: 700,height: 380, fixed: true}); };</script>
+							<script>function Hetong_Renew_List<%=rs("hId")%>() {$.dialog.open('../Main/GetUpdateRW.asp?action=Hetong&sType=RenewList&Id=<%=rs("hId")%>', {title: 'æŸ¥çœ‹', width: 860,height: 440, fixed: true}); };</script>
+							<script>function Order_Products_List<%=rs("oId")%>() {$.dialog.open('../Main/GetUpdateRW.asp?action=OrderProducts&sType=List&Id=<%=rs("oId")%>', {title: 'æŸ¥çœ‹', width: 860,height: 440, fixed: true}); };</script>
+							<script>function Hetong_Renew_InfoAdd<%=rs("hId")%>() {$.dialog.open('../Main/GetUpdateRW.asp?action=Hetong&sType=AddRenew&Id=<%=rs("hId")%>', {title: 'ç»­è´¹', width: 600,height: 340, fixed: true}); };</script>
+							<script>function Hetong_InfoEdit<%=rs("hId")%>() {$.dialog.open('../Main/GetUpdateRW.asp?action=Hetong&sType=Edit&Id=<%=rs("hId")%>', {title: 'ç¼–è¾‘', width: 700,height: 380, fixed: true}); };</script>
 							<script>function Hetong_InfoDel<%=rs("hId")%>() {$.dialog( { content: '<%=Alert_del_YN%>',icon: 'error',ok: function () { art.dialog.open('../Main/GetUpdateRW.asp?action=Hetong&sType=Delete&Id=<%=rs("hId")%>');return false;},cancel: true }); };</script>
-							<script>function Hetong_InfoView<%=rs("hId")%>() {art.dialog({ title: 'ÏêÇé±¸×¢', content: '<%=EasyCrm.clearWord(""&rs("hContent")&"")%>',drag: false,resize: false}); };</script>
-							<script>function Hetong_AuditReasons<%=rs("hId")%>() {art.dialog({ title: 'ÉóºËÔ­Òò',content: '<%=EasyCrm.clearWord(""&rs("hAuditReasons")&"")%>',drag: false,resize: false}); };</script>
+							<script>function Hetong_InfoView<%=rs("hId")%>() {art.dialog({ title: 'è¯¦æƒ…å¤‡æ³¨', content: '<%=EasyCrm.clearWord(""&rs("hContent")&"")%>',drag: false,resize: false}); };</script>
+							<script>function Hetong_AuditReasons<%=rs("hId")%>() {art.dialog({ title: 'å®¡æ ¸åŸå› ',content: '<%=EasyCrm.clearWord(""&rs("hAuditReasons")&"")%>',drag: false,resize: false}); };</script>
 						<%
 						rs.MoveNext
 						Loop
@@ -1477,16 +1477,16 @@ elseif sType="InfoView" then
 	<tr>
 		<td valign="top" class="td_n Bottom_pd "> 
 			<% If mid(Session("CRM_qx"), 37, 1) = 1 Then %>
-			<input name="Back" type="button" id="Back" class="button45" value="ĞÂÔö" onclick='Hetong_InfoAdd()' style="cursor:pointer">¡¡
+			<input name="Back" type="button" id="Back" class="button45" value="æ–°å¢" onclick='Hetong_InfoAdd()' style="cursor:pointer">ã€€
 			<%end if%>
-			<input name="Back" type="button" id="Back" class="button43" value="¹Ø±Õ" onClick="art.dialog.close();">
+			<input name="Back" type="button" id="Back" class="button43" value="å…³é—­" onClick="art.dialog.close();">
 		</td>
 	</tr>
 </table>
 </div>
-<script>function Hetong_InfoAdd() {$.dialog.open('../Main/GetUpdateRW.asp?action=Hetong&sType=Add&cID=<%=cID%>', {title: 'ĞÂ´°¿Ú', width: 700, height: 380,fixed: true}); };</script>
+<script>function Hetong_InfoAdd() {$.dialog.open('../Main/GetUpdateRW.asp?action=Hetong&sType=Add&cID=<%=cID%>', {title: 'æ–°çª—å£', width: 700, height: 380,fixed: true}); };</script>
 	<%
-	elseif otype="Service" then '·şÎñ¼ÇÂ¼ ?action=Client&sType=InfoView&otype=Service&cID=cID
+	elseif otype="Service" then 'æœåŠ¡è®°å½• ?action=Client&sType=InfoView&otype=Service&cID=cID
 	%>
 			<table width="100%" border="0" cellpadding="0" cellspacing="0"> 
 				<tr>
@@ -1521,7 +1521,7 @@ elseif sType="InfoView" then
 								<%if Service_sTime = 1 then %>
 								<td class="td_l_c"><%=L_Service_sTime%></td>
 								<%end if%>
-								<td width="90" class="td_l_c">¹ÜÀí</td>
+								<td width="90" class="td_l_c">ç®¡ç†</td>
 							</tr>
 						<%
 						Set rs = Server.CreateObject("ADODB.Recordset")
@@ -1546,10 +1546,10 @@ elseif sType="InfoView" then
 								<td class="td_l_c"><%=EasyCrm.FormatDate(rs("sSDate"),2)%></td>
 								<%end if%>
 								<%if Service_sContent = 1 then %>
-								<td class="td_l_c"><%if rs("sContent")<>"" then%><input type="button" class="button226" value="²é¿´" onclick='Service_ContentView<%=rs("sId")%>()' style="cursor:pointer" /><%end if%></td>
+								<td class="td_l_c"><%if rs("sContent")<>"" then%><input type="button" class="button226" value="æŸ¥çœ‹" onclick='Service_ContentView<%=rs("sId")%>()' style="cursor:pointer" /><%end if%></td>
 								<%end if%>
 								<%if Service_sInfo = 1 then %>
-								<td class="td_l_c"><%if rs("sInfo")<>"" then%><input type="button" class="button226" value="²é¿´" onclick='Service_InfoView<%=rs("sId")%>()' style="cursor:pointer" /><%end if%></td>
+								<td class="td_l_c"><%if rs("sInfo")<>"" then%><input type="button" class="button226" value="æŸ¥çœ‹" onclick='Service_InfoView<%=rs("sId")%>()' style="cursor:pointer" /><%end if%></td>
 								<%end if%>
 								<%if Service_sUser = 1 then %>
 								<td class="td_l_c"><%=rs("sUser")%></td>
@@ -1559,10 +1559,10 @@ elseif sType="InfoView" then
 								<%end if%>
 								<td class="td_l_c"><% If mid(Session("CRM_qx"), 43, 1) = 1 Then %><input type="button" class="button_info_edit" value=" " title="<%=L_Edit%>"  onclick='Service_InfoEdit<%=rs("sId")%>()' style="cursor:pointer" /><%end if%> <% If mid(Session("CRM_qx"), 44, 1) = 1 Then %><input type="button" class="button_info_del" value=" " title="<%=L_Del%>" onclick='Service_InfoDel<%=rs("sId")%>()' style="cursor:pointer" /><%end if%></td>
 							</tr>
-							<script>function Service_InfoEdit<%=rs("sId")%>() {$.dialog.open('../Main/GetUpdateRW.asp?action=Service&sType=Edit&Id=<%=rs("sId")%>', {title: '±à¼­', width: 800,height: 370, fixed: true}); };</script>
+							<script>function Service_InfoEdit<%=rs("sId")%>() {$.dialog.open('../Main/GetUpdateRW.asp?action=Service&sType=Edit&Id=<%=rs("sId")%>', {title: 'ç¼–è¾‘', width: 800,height: 370, fixed: true}); };</script>
 							<script>function Service_InfoDel<%=rs("sId")%>() {$.dialog( { content: '<%=Alert_del_YN%>',icon: 'error',ok: function () { art.dialog.open('../Main/GetUpdateRW.asp?action=Service&sType=Delete&Id=<%=rs("sId")%>');return false;},cancel: true }); };</script>
-							<script>function Service_ContentView<%=rs("sId")%>() {art.dialog({ title: 'ÏêÇé±¸×¢', content: '<%=EasyCrm.clearWord(""&rs("sContent")&"")%>',drag: false,resize: false}); };</script>
-							<script>function Service_InfoView<%=rs("sId")%>() {art.dialog({ title: '´¦Àí½á¹û',content: '<%=EasyCrm.clearWord(""&rs("sInfo")&"")%>',drag: false,resize: false}); };</script>
+							<script>function Service_ContentView<%=rs("sId")%>() {art.dialog({ title: 'è¯¦æƒ…å¤‡æ³¨', content: '<%=EasyCrm.clearWord(""&rs("sContent")&"")%>',drag: false,resize: false}); };</script>
+							<script>function Service_InfoView<%=rs("sId")%>() {art.dialog({ title: 'å¤„ç†ç»“æœ',content: '<%=EasyCrm.clearWord(""&rs("sInfo")&"")%>',drag: false,resize: false}); };</script>
 						<%
 						rs.MoveNext
 						Loop
@@ -1580,16 +1580,16 @@ elseif sType="InfoView" then
 	<tr>
 		<td valign="top" class="td_n Bottom_pd "> 
 			<% If mid(Session("CRM_qx"), 42, 1) = 1 Then %>
-			<input name="Back" type="button" id="Back" class="button45" value="ĞÂÔö" onclick='Service_InfoAdd()' style="cursor:pointer">¡¡
+			<input name="Back" type="button" id="Back" class="button45" value="æ–°å¢" onclick='Service_InfoAdd()' style="cursor:pointer">ã€€
 			<%end if%>
-			<input name="Back" type="button" id="Back" class="button43" value="¹Ø±Õ" onClick="art.dialog.close();">
+			<input name="Back" type="button" id="Back" class="button43" value="å…³é—­" onClick="art.dialog.close();">
 		</td>
 	</tr>
 </table>
 </div>
-<script>function Service_InfoAdd() {$.dialog.open('../Main/GetUpdateRW.asp?action=Service&sType=Add&cID=<%=cID%>', {title: 'ĞÂ´°¿Ú', width: 800, height: 370,fixed: true}); };</script>
+<script>function Service_InfoAdd() {$.dialog.open('../Main/GetUpdateRW.asp?action=Service&sType=Add&cID=<%=cID%>', {title: 'æ–°çª—å£', width: 800, height: 370,fixed: true}); };</script>
 	<%
-	elseif otype="Expense" then '·ÑÓÃ¼ÇÂ¼ ?action=Client&sType=InfoView&otype=Expense&cID=cID
+	elseif otype="Expense" then 'è´¹ç”¨è®°å½• ?action=Client&sType=InfoView&otype=Expense&cID=cID
 	%>
 			<table width="100%" border="0" cellpadding="0" cellspacing="0"> 
 				<tr>
@@ -1618,7 +1618,7 @@ elseif sType="InfoView" then
 								<%if Expense_eTime = 1 then %>
 								<td class="td_l_c"><%=L_Expense_eTime%></td>
 								<%end if%>
-								<td width="90" class="td_l_c">¹ÜÀí</td>
+								<td width="90" class="td_l_c">ç®¡ç†</td>
 							</tr>
 						<%
 						Set rs = Server.CreateObject("ADODB.Recordset")
@@ -1631,7 +1631,7 @@ elseif sType="InfoView" then
 								<td class="td_l_c"><%=EasyCrm.FormatDate(rs("eDate"),2)%></td>
 								<%end if%>
 								<%if Expense_eOutIn = 1 then %>
-								<td class="td_l_c"><%if rs("eOutIn") = 1 then %>ÊÕÈë<%else%>Ö§³ö<%end if%></td>
+								<td class="td_l_c"><%if rs("eOutIn") = 1 then %>æ”¶å…¥<%else%>æ”¯å‡º<%end if%></td>
 								<%end if%>
 								<%if Expense_eType = 1 then %>
 								<td class="td_l_c"><%=rs("eType")%></td>
@@ -1640,7 +1640,7 @@ elseif sType="InfoView" then
 								<td class="td_l_c"><%=rs("eMoney")%></td>
 								<%end if%>
 								<%if Expense_eContent = 1 then %>
-								<td class="td_l_c"><%if rs("eContent")<>"" then%><input type="button" class="button226" value="²é¿´" onclick='Expense_ContentView<%=rs("eId")%>()' style="cursor:pointer" /><%end if%></td>
+								<td class="td_l_c"><%if rs("eContent")<>"" then%><input type="button" class="button226" value="æŸ¥çœ‹" onclick='Expense_ContentView<%=rs("eId")%>()' style="cursor:pointer" /><%end if%></td>
 								<%end if%>
 								<%if Expense_eUser = 1 then %>
 								<td class="td_l_c"><%=rs("eUser")%></td>
@@ -1650,9 +1650,9 @@ elseif sType="InfoView" then
 								<%end if%>
 								<td class="td_l_c"><% If mid(Session("CRM_qx"), 48, 1) = 1 Then %><input type="button" class="button_info_edit" value=" " title="<%=L_Edit%>"  onclick='Expense_InfoEdit<%=rs("eId")%>()' style="cursor:pointer" /><%end if%> <% If mid(Session("CRM_qx"), 49, 1) = 1 Then %><input type="button" class="button_info_del" value=" " title="<%=L_Del%>" onclick='Expense_InfoDel<%=rs("eId")%>()' style="cursor:pointer" /><%end if%></td>
 							</tr>
-							<script>function Expense_InfoEdit<%=rs("eId")%>() {$.dialog.open('../Main/GetUpdateRW.asp?action=Expense&sType=Edit&eOutIn=<%=rs("eOutIn")%>&Id=<%=rs("eId")%>', {title: '±à¼­', width: 500,height: 270, fixed: true}); };</script>
+							<script>function Expense_InfoEdit<%=rs("eId")%>() {$.dialog.open('../Main/GetUpdateRW.asp?action=Expense&sType=Edit&eOutIn=<%=rs("eOutIn")%>&Id=<%=rs("eId")%>', {title: 'ç¼–è¾‘', width: 500,height: 270, fixed: true}); };</script>
 							<script>function Expense_InfoDel<%=rs("eId")%>() {$.dialog( { content: '<%=Alert_del_YN%>',icon: 'error',ok: function () { art.dialog.open('../Main/GetUpdateRW.asp?action=Expense&sType=Delete&Id=<%=rs("eId")%>');return false;},cancel: true }); };</script>
-							<script>function Expense_ContentView<%=rs("eId")%>() {art.dialog({ title: 'ÏêÇé±¸×¢', content: '<%=EasyCrm.clearWord(""&rs("eContent")&"")%>',drag: false,resize: false}); };</script>
+							<script>function Expense_ContentView<%=rs("eId")%>() {art.dialog({ title: 'è¯¦æƒ…å¤‡æ³¨', content: '<%=EasyCrm.clearWord(""&rs("eContent")&"")%>',drag: false,resize: false}); };</script>
 						<%
 						rs.MoveNext
 						Loop
@@ -1669,21 +1669,21 @@ elseif sType="InfoView" then
 <table width="100%" border="0" cellpadding="0" cellspacing="0">
 	<tr>
 		<td valign="top" class="td_n Bottom_pd "> 
-			<span class="Bottom_pd r">×ÜÊÕÈë£º<%=EasyCrm.getSUMItem("Expense","eMoney","eMoneystr"," and cID = "&cID&" and eOutIn = 1 ")%> Ôª¡¡ ×ÜÖ§³ö£º<%=EasyCrm.getSUMItem("Expense","eMoney","eMoneystr"," and cID = "&cID&" and eOutIn = 0 ")%> Ôª</span>
+			<span class="Bottom_pd r">æ€»æ”¶å…¥ï¼š<%=EasyCrm.getSUMItem("Expense","eMoney","eMoneystr"," and cID = "&cID&" and eOutIn = 1 ")%> å…ƒã€€ æ€»æ”¯å‡ºï¼š<%=EasyCrm.getSUMItem("Expense","eMoney","eMoneystr"," and cID = "&cID&" and eOutIn = 0 ")%> å…ƒ</span>
 			<% If mid(Session("CRM_qx"), 47, 1) = 1 Then %>
-			<input name="Back" type="button" id="Back" class="button45" value="ĞÂÔöÊÕÈë" onclick='Expense_InfoAdd_IN()' style="cursor:pointer">¡¡
-			<input name="Back" type="button" id="Back" class="button46" value="ĞÂÔöÖ§³ö" onclick='Expense_InfoAdd_OUT()' style="cursor:pointer">¡¡
+			<input name="Back" type="button" id="Back" class="button45" value="æ–°å¢æ”¶å…¥" onclick='Expense_InfoAdd_IN()' style="cursor:pointer">ã€€
+			<input name="Back" type="button" id="Back" class="button46" value="æ–°å¢æ”¯å‡º" onclick='Expense_InfoAdd_OUT()' style="cursor:pointer">ã€€
 			<%end if%>
-			<input name="Back" type="button" id="Back" class="button43" value="¹Ø±Õ" onClick="art.dialog.close();">
+			<input name="Back" type="button" id="Back" class="button43" value="å…³é—­" onClick="art.dialog.close();">
 			
 		</td>
 	</tr>
 </table>
 </div>
-<script>function Expense_InfoAdd_IN() {$.dialog.open('../Main/GetUpdateRW.asp?action=Expense&sType=Add&eOutIn=1&cID=<%=cID%>', {title: 'ĞÂ´°¿Ú', width: 500, height: 270,fixed: true}); };</script>
-<script>function Expense_InfoAdd_OUT() {$.dialog.open('../Main/GetUpdateRW.asp?action=Expense&sType=Add&eOutIn=0&cID=<%=cID%>', {title: 'ĞÂ´°¿Ú', width: 500, height: 270,fixed: true}); };</script>
+<script>function Expense_InfoAdd_IN() {$.dialog.open('../Main/GetUpdateRW.asp?action=Expense&sType=Add&eOutIn=1&cID=<%=cID%>', {title: 'æ–°çª—å£', width: 500, height: 270,fixed: true}); };</script>
+<script>function Expense_InfoAdd_OUT() {$.dialog.open('../Main/GetUpdateRW.asp?action=Expense&sType=Add&eOutIn=0&cID=<%=cID%>', {title: 'æ–°çª—å£', width: 500, height: 270,fixed: true}); };</script>
 	<%
-	elseif otype="File" then '¸½¼ş¼ÇÂ¼ ?action=Client&sType=InfoView&otype=File&cID=cID
+	elseif otype="File" then 'é™„ä»¶è®°å½• ?action=Client&sType=InfoView&otype=File&cID=cID
 	%>
 			<table width="100%" border="0" cellpadding="0" cellspacing="0"> 
 				<tr>
@@ -1693,12 +1693,12 @@ elseif sType="InfoView" then
 							<tr class="tr_t">
 								<td class="td_l_c" width="80"><%=L_File_fId%></td>
 								<td class="td_l_l"><%=L_File_fTitle%></td>
-								<td class="td_l_c" width="80">ÎÄ¼ş´óĞ¡</td>
+								<td class="td_l_c" width="80">æ–‡ä»¶å¤§å°</td>
 								<td class="td_l_c" width="80"><%=L_File_fFile%></td>
 								<td class="td_l_c" width="80"><%=L_File_fContent%></td>
 								<td class="td_l_c" width="80"><%=L_File_fUser%></td>
 								<td class="td_l_c" width="80"><%=L_File_fTime%></td>
-								<td width="50" class="td_l_c">¹ÜÀí</td>
+								<td width="50" class="td_l_c">ç®¡ç†</td>
 							</tr>
 						<%
 						Set rs = Server.CreateObject("ADODB.Recordset")
@@ -1710,15 +1710,15 @@ elseif sType="InfoView" then
 								<td class="td_l_c"><%=rs("fId")%></td>
 								<td class="td_l_l"><%=rs("fTitle")%></td>
 								<td class="td_l_c"><%if rs("fFile")<>"" then%><%=EasyCrm.showsize(rs("fFile"))%><%end if%></td>
-								<td class="td_l_c"><%if rs("fFile")<>"" then%><input type="button" class="button222" <%if inStr("'gif','jpg','png','bmp'", right(rs("fFile"),3) ) > 0 then %>value="²é¿´"  onclick="javascript:window.open('<%=rs("fFile")%>')" <%else%>value="ÏÂÔØ" onClick=window.location.href="<%=rs("fFile")%>"<%end if%> style="cursor:pointer" /><%else%>ÎŞ<%end if%></td>
-								<td class="td_l_c"><%if rs("fContent")<>"" then%><input type="button" class="button226" value="²é¿´" onclick='File_ContentView<%=rs("fId")%>()' style="cursor:pointer" /><%else%>ÎŞ<%end if%></td>
+								<td class="td_l_c"><%if rs("fFile")<>"" then%><input type="button" class="button222" <%if inStr("'gif','jpg','png','bmp'", right(rs("fFile"),3) ) > 0 then %>value="æŸ¥çœ‹"  onclick="javascript:window.open('<%=rs("fFile")%>')" <%else%>value="ä¸‹è½½" onClick=window.location.href="<%=rs("fFile")%>"<%end if%> style="cursor:pointer" /><%else%>æ— <%end if%></td>
+								<td class="td_l_c"><%if rs("fContent")<>"" then%><input type="button" class="button226" value="æŸ¥çœ‹" onclick='File_ContentView<%=rs("fId")%>()' style="cursor:pointer" /><%else%>æ— <%end if%></td>
 								<td class="td_l_c"><%=rs("fUser")%></td>
 								<td class="td_l_c"><%=EasyCrm.FormatDate(rs("fTime"),2)%></td>
 								<td class="td_l_c"><% If mid(Session("CRM_qx"), 54, 1) = 1 Then %><input type="button" class="button_info_del" value=" " title="<%=L_Del%>" onclick='File_InfoDel<%=rs("fId")%>()' style="cursor:pointer" /><%end if%></td>
 							</tr>
 							<script>function File_InfoDel<%=rs("fId")%>() {$.dialog( { content: '<%=Alert_del_YN%>',icon: 'error',ok: function () { art.dialog.open('../Main/GetUpdateRW.asp?action=File&sType=Delete&Id=<%=rs("fId")%>');return false;},cancel: true }); };</script>
-							<script>function File_ContentView<%=rs("fId")%>() {art.dialog({ title: 'ÏêÇé±¸×¢', content: '<%=EasyCrm.clearWord(""&rs("fContent")&"")%>',drag: false,resize: false}); };</script>
-							<script>function File_InfoView<%=rs("fId")%>() {art.dialog({ title: '²é¿´Í¼Æ¬', content: '<img src="<%=rs("fFile")%>" />',lock: true}); };</script>
+							<script>function File_ContentView<%=rs("fId")%>() {art.dialog({ title: 'è¯¦æƒ…å¤‡æ³¨', content: '<%=EasyCrm.clearWord(""&rs("fContent")&"")%>',drag: false,resize: false}); };</script>
+							<script>function File_InfoView<%=rs("fId")%>() {art.dialog({ title: 'æŸ¥çœ‹å›¾ç‰‡', content: '<img src="<%=rs("fFile")%>" />',lock: true}); };</script>
 						<%
 						rs.MoveNext
 						Loop
@@ -1736,17 +1736,17 @@ elseif sType="InfoView" then
 	<tr>
 		<td valign="top" class="td_n Bottom_pd "> 
 			<% If mid(Session("CRM_qx"), 52, 1) = 1 Then %>
-			<input name="Back" type="button" id="Back" class="button45" value="ĞÂÔö" onclick='File_InfoAdd()' style="cursor:pointer">¡¡
+			<input name="Back" type="button" id="Back" class="button45" value="æ–°å¢" onclick='File_InfoAdd()' style="cursor:pointer">ã€€
 			<%end if%>
-			<input name="Back" type="button" id="Back" class="button43" value="¹Ø±Õ" onClick="art.dialog.close();">
+			<input name="Back" type="button" id="Back" class="button43" value="å…³é—­" onClick="art.dialog.close();">
 			
 		</td>
 	</tr>
 </table>
 </div>
-<script>function File_InfoAdd() {$.dialog.open('../Main/GetUpdateRW.asp?action=File&sType=Add&cID=<%=cID%>', {title: 'ĞÂ´°¿Ú', width: 500, height: 210,fixed: true}); };</script>
+<script>function File_InfoAdd() {$.dialog.open('../Main/GetUpdateRW.asp?action=File&sType=Add&cID=<%=cID%>', {title: 'æ–°çª—å£', width: 500, height: 210,fixed: true}); };</script>
 	<%
-	elseif otype="Share" then '¹²Ïí¼ÇÂ¼
+	elseif otype="Share" then 'å…±äº«è®°å½•
 	%>
 	<script>
 	function Setdisabled(evt)
@@ -1781,11 +1781,11 @@ elseif sType="InfoView" then
 						<table width="100%" border="0" cellspacing="0" cellpadding="0" CLASS="table_1">
 							<col width="100" />
 							<tr class="tr_t"> 
-								<td class="td_l_l" COLSPAN="2">Ñ¡Ôñ¹²Ïí¶ÔÏó</td>
+								<td class="td_l_l" COLSPAN="2">é€‰æ‹©å…±äº«å¯¹è±¡</td>
 							</tr>
 							<tr class="tr_f"> 
-								<td class="td_l_c red">ÊÇ·ñ¹²Ïí </td>
-								<td class="td_l_l red"><input type="radio" id="cShare" name="cShare" value= '0' <%if EasyCrm.getNewItem("Client","cID",""&cID&"","cShare")=0 then %>checked <%end if%> onclick="Setdisabled()"> ·ñ¡¡<input type="radio" id="cShare" name="cShare" value= '1' <%if EasyCrm.getNewItem("Client","cID",""&cID&"","cShare")=1 then %>checked <%end if%> onclick="Setdisabled()"> ÊÇ</td>
+								<td class="td_l_c red">æ˜¯å¦å…±äº« </td>
+								<td class="td_l_l red"><input type="radio" id="cShare" name="cShare" value= '0' <%if EasyCrm.getNewItem("Client","cID",""&cID&"","cShare")=0 then %>checked <%end if%> onclick="Setdisabled()"> å¦ã€€<input type="radio" id="cShare" name="cShare" value= '1' <%if EasyCrm.getNewItem("Client","cID",""&cID&"","cShare")=1 then %>checked <%end if%> onclick="Setdisabled()"> æ˜¯</td>
 							</tr>
 							<%
 								Set rsg = Server.CreateObject("ADODB.Recordset")
@@ -1800,7 +1800,7 @@ elseif sType="InfoView" then
 									rsm.Open "Select * From [user] where uGroup="&rsg("gId")&" ",conn,1,1
 									Do While Not rsm.BOF And Not rsm.EOF
 								%>
-									<input type="checkbox" id="cShareRange" name="cShareRange" value= '<%=rsm("uName")%>' <%if EasyCrm.getNewItem("Client","cID",""&cID&"","cShare")=0 then %>disabled readOnly <%end if%> <%if inStr(EasyCrm.getNewItem("Client","cID",""&cID&"","cShareRange"),rsm("uName"))>0 then%>checked<%end if%>> <%=rsm("uName")%>¡¡
+									<input type="checkbox" id="cShareRange" name="cShareRange" value= '<%=rsm("uName")%>' <%if EasyCrm.getNewItem("Client","cID",""&cID&"","cShare")=0 then %>disabled readOnly <%end if%> <%if inStr(EasyCrm.getNewItem("Client","cID",""&cID&"","cShareRange"),rsm("uName"))>0 then%>checked<%end if%>> <%=rsm("uName")%>ã€€
 								<%
 									rsm.MoveNext
 									Loop
@@ -1823,8 +1823,8 @@ elseif sType="InfoView" then
 			<table width="100%" border="0" cellpadding="0" cellspacing="0">
 				<tr>
 					<td valign="top" class="td_n Bottom_pd "> 
-						<input name="Back" type="Submit" id="Back" class="button45" value="±£´æ" onclick='Share_InfoSave()' style="cursor:pointer">¡¡
-			<input name="Back" type="button" id="Back" class="button43" value="¹Ø±Õ" onClick="art.dialog.close();">
+						<input name="Back" type="Submit" id="Back" class="button45" value="ä¿å­˜" onclick='Share_InfoSave()' style="cursor:pointer">ã€€
+			<input name="Back" type="button" id="Back" class="button43" value="å…³é—­" onClick="art.dialog.close();">
 						
 					</td>
 				</tr>
@@ -1833,16 +1833,16 @@ elseif sType="InfoView" then
 		</form>
 
 	<%
-	elseif otype="ShareSave" then '±£´æ¹²Ïí
+	elseif otype="ShareSave" then 'ä¿å­˜å…±äº«
 		cShare = Request.Form("cShare")
 		cShareRange = Request.Form("cShareRange")
 		conn.execute("update [Client] set cShare='"&cShare&"',cShareRange='"&cShareRange&"' where cId = "&cID&" ")
-		Response.Write("<script>location.href='?action=Client&sType=InfoView&otype=Share&cID="&cId&"&tipinfo=²Ù×÷³É¹¦£¡';</script>")
+		Response.Write("<script>location.href='?action=Client&sType=InfoView&otype=Share&cID="&cId&"&tipinfo=æ“ä½œæˆåŠŸï¼';</script>")
 		Response.End()
 	%>
 	
 	<%
-	elseif otype="History" then 'ÀúÊ·¼ÇÂ¼ ?action=Client&sType=InfoView&otype=File&cID=cID
+	elseif otype="History" then 'å†å²è®°å½• ?action=Client&sType=InfoView&otype=File&cID=cID
 	%>
 			<table width="100%" border="0" cellpadding="0" cellspacing="0"> 
 				<tr>
@@ -1850,12 +1850,12 @@ elseif sType="InfoView" then
 
 						<table width="100%" border="0" cellspacing="0" cellpadding="0" CLASS="table_1">
 							<tr class="tr_t">
-								<td class="td_l_c" width="80">±àºÅ</td>
-								<td class="td_l_c" width="80">Êı¾İ±í</td>
-								<td class="td_l_c" width="80">ĞĞÎª</td>
-								<td class="td_l_l">Ô­Òò</td>
-								<td class="td_l_c" width="80">²Ù×÷ÈË</td>
-								<td class="td_l_c" width="130">Ê±¼ä</td>
+								<td class="td_l_c" width="80">ç¼–å·</td>
+								<td class="td_l_c" width="80">æ•°æ®è¡¨</td>
+								<td class="td_l_c" width="80">è¡Œä¸º</td>
+								<td class="td_l_l">åŸå› </td>
+								<td class="td_l_c" width="80">æ“ä½œäºº</td>
+								<td class="td_l_c" width="130">æ—¶é—´</td>
 							</tr>
 						<%
 						Set rs = Server.CreateObject("ADODB.Recordset")
@@ -1887,7 +1887,7 @@ elseif sType="InfoView" then
 <table width="100%" border="0" cellpadding="0" cellspacing="0">
 	<tr>
 		<td valign="top" class="td_n Bottom_pd "> 
-			<input name="Back" type="button" id="Back" class="button43" value="¹Ø±Õ" onClick="art.dialog.close();">
+			<input name="Back" type="button" id="Back" class="button43" value="å…³é—­" onClick="art.dialog.close();">
 			
 		</td>
 	</tr>
@@ -1897,9 +1897,9 @@ elseif sType="InfoView" then
 	end if
 	%>
 <%
-elseif sType="DelReason" then 'É¾³ı¿Í»§ÌîĞ´²Ù×÷Ô­Òò
+elseif sType="DelReason" then 'åˆ é™¤å®¢æˆ·å¡«å†™æ“ä½œåŸå› 
 %>	<script language="JavaScript">
-	<!-- ¸úµ¥¼ÇÂ¼±ØÌîÏîÌáÊ¾
+	<!-- è·Ÿå•è®°å½•å¿…å¡«é¡¹æç¤º
 	function CheckInput()
 	{
 		if(document.all.lReason.value == ""){art.dialog({title: 'Error',time: 1,icon: 'warning',content: '<%=alert04%>'});document.all.lReason.focus();return false;}
@@ -1920,15 +1920,15 @@ elseif sType="DelReason" then 'É¾³ı¿Í»§ÌîĞ´²Ù×÷Ô­Òò
 	<tr>
 		<td valign="top" class="td_n Bottom_pd "> 
 			<input name="cId" type="hidden" id="cId" value="<% = cId %>">
-			<input type="submit" name="Submit" class="button45" value="±£´æ" >¡¡
-			<input name="Back" type="button" id="Back" class="button43" value="¹Ø±Õ" onClick="art.dialog.close();">
+			<input type="submit" name="Submit" class="button45" value="ä¿å­˜" >ã€€
+			<input name="Back" type="button" id="Back" class="button43" value="å…³é—­" onClick="art.dialog.close();">
 		</td>
 	</tr>
 </table>
 </div>
 				</form>
 <%
-elseif sType="DelTrue" then 'Ö´ĞĞÉ¾³ı¿Í»§²Ù×÷
+elseif sType="DelTrue" then 'æ‰§è¡Œåˆ é™¤å®¢æˆ·æ“ä½œ
 	cId = CLng(ABS(Request("cId")))
 	lReason = Trim(Request("lReason"))
 	conn.execute("update Client set cYn = 0 where cId = "&cId&" ")
